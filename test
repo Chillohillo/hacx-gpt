@@ -1,0 +1,199 @@
+#!/bin/sh
+echo "🚀 Starte Installation von CyberSecGPT (ethische Version)..."
+
+# Erstelle Verzeichnis
+mkdir -p ~/cybersec
+cd ~/cybersec || exit 1
+
+# Sicherstellen, dass Python-Umgebung korrekt eingerichtet ist
+apk update >/dev/null 2>&1
+apk add --no-cache python3 py3-pip git curl wget py3-setuptools py3-wheel build-base linux-headers python3-dev >/dev/null 2>&1
+
+# Erstelle HacxGPT.py mit ethischem Inhalt
+cat > HacxGPT.py << 'PYTHON_EOF'
+#!/usr/bin/env python3
+"""
+Ethik-konformer Cybersecurity Assistant
+Für Bildungszwecke im Rahmen legaler Sicherheitstests
+"""
+
+import os
+import sys
+import json
+import requests
+from colorama import Fore, init, Style
+
+init(autoreset=True)
+
+# Sicherheitskonformes System-Prompt
+SYSTEM_PROMPT = '''You are CyberSecGPT, an educational AI assistant focused on cybersecurity principles.
+You provide information strictly within legal boundaries and ethical guidelines. You help students
+understand security concepts, penetration testing methodologies (only when authorized), and defensive
+security practices. You never provide instructions for illegal activities or bypass security measures
+without proper authorization. Your goal is to educate and promote responsible cybersecurity practices.'''
+
+def get_api_key():
+    """Sicheres API-Key Management"""
+    key_file = os.path.expanduser("~/.cybersec_api_key")
+    
+    if os.path.exists(key_file):
+        with open(key_file, "r") as f:
+            return f.read().strip()
+    
+    print(Fore.YELLOW + "\\nWillkommen zu CyberSecGPT - dem ethischen Cybersecurity-Assistenten")
+    print(Fore.CYAN + "Dieses Tool dient ausschließlich Bildungszwecken im Rahmen legaler Sicherheitstests.")
+    print(Fore.CYAN + "Bitte beachte: Unbefugtes Scannen oder Testen von Systemen ist illegal!")
+    print(Fore.CYAN + "Mehr Informationen zu legalem Ethical Hacking: https://www.bsi.bund.de")
+    
+    api_providers = {
+        "1": ("OpenRouter", "https://openrouter.ai"),
+        "2": ("DeepSeek", "https://platform.deepseek.com")
+    }
+    
+    print("\\n" + Fore.MAGENTA + "API-Anbieter wählen:")
+    for key, (name, _) in api_providers.items():
+        print(f"{key}. {name}")
+    
+    choice = input(Fore.CYAN + "\\nWähle einen Anbieter (1-2): ").strip()
+    provider = api_providers.get(choice, api_providers["1"])
+    
+    print(Fore.YELLOW + f"\\nGehe zu {Fore.CYAN}{provider[1]}{Fore.YELLOW} um einen API-Key zu erstellen")
+    print(Fore.YELLOW + "Kostenlose Tiers sind für Bildungszwecke verfügbar")
+    
+    api_key = input(Fore.YELLOW + "\\nGib deinen API-Key ein: ").strip()
+    
+    with open(key_file, "w") as f:
+        f.write(api_key)
+    
+    print(Fore.GREEN + "\\nAPI-Key wurde sicher gespeichert. Für Änderungen lösche ~/.cybersec_api_key")
+    return api_key, provider[0].lower()
+
+def query_api(prompt, api_key, provider):
+    """API-Abfrage mit Fehlerbehandlung"""
+    if provider == "openrouter":
+        url = "https://openrouter.ai/api/v1/chat/completions"
+        model = "anthropic/claude-3-haiku"  # Kostenoptimiert für Bildung
+    elif provider == "deepseek":
+        url = "https://api.deepseek.com/v1/chat/completions"
+        model = "deepseek-chat"
+    else:
+        print(Fore.RED + "Ungültiger API-Anbieter. Starte das Programm neu.")
+        sys.exit(1)
+
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://github.com/ethical-ai-community/educational-ai",
+        "X-Title": "CyberSecGPT Educational Tool"
+    }
+    
+    data = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": prompt}
+        ],
+        "temperature": 0.3,
+        "max_tokens": 1024
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=data, timeout=30)
+        response.raise_for_status()
+        return response.json()["choices"][0]["message"]["content"]
+    except requests.exceptions.RequestException as e:
+        return (f"{Fore.RED}API-Fehler: {str(e)}\\n"
+                f"{Fore.YELLOW}Tipps:\\n"
+                f"- Prüfe deine Internetverbindung\\n"
+                f"- Stelle sicher, dass der API-Key korrekt ist\\n"
+                f"- Besuche {provider}.ai für Statusinformationen")
+    except (KeyError, json.JSONDecodeError):
+        return f"{Fore.RED}Unerwartete API-Antwort. Bitte versuche es später erneut."
+
+def show_educational_resources():
+    """Zeige relevante Bildungsressourcen"""
+    resources = [
+        f"{Fore.CYAN}📚 Legale Ethical Hacking Ressourcen:",
+        f"- BSI für Sicherheit in der Informationstechnik: {Fore.BLUE}https://www.bsi.bund.de",
+        f"- EC-Council zertifizierte Kurse: {Fore.BLUE}https://www.eccouncil.org",
+        f"- OWASP Sicherheitsrichtlinien: {Fore.BLUE}https://owasp.org",
+        f"- Kali Linux offizielle Dokumentation: {Fore.BLUE}https://www.kali.org/docs/"
+    ]
+    return "\\n".join(resources)
+
+if __name__ == "__main__":
+    api_key, provider = get_api_key()
+    
+    print(Fore.MAGENTA + "\\n" + "="*50)
+    print(Fore.MAGENTA + " CyberSecGPT - Ethical Cybersecurity Assistant")
+    print(Fore.MAGENTA + " Für Bildungszwecke im Rahmen gesetzlicher Vorgaben")
+    print(Fore.MAGENTA + "="*50)
+    
+    print(show_educational_resources())
+    
+    print(Fore.YELLOW + "\\n💡 Tipp: Dieses Tool dient der Ausbildung in Cybersecurity.")
+    print(Fore.YELLOW + "   Alle Sicherheitstests müssen vorab autorisiert sein!")
+    
+    while True:
+        try:
+            prompt = input(Fore.CYAN + "\\nDeine Frage (oder 'exit' zum Beenden): ")
+            if prompt.lower() in ['exit', 'quit', 'bye']:
+                print(Fore.GREEN + "Auf Wiedersehen! Bleib sicher und legal.")
+                break
+                
+            print(Fore.YELLOW + "\\n🔍 Analysiere deine Anfrage...")
+            response = query_api(prompt, api_key, provider)
+            print(Fore.GREEN + "\\nCyberSecGPT: " + response)
+            
+        except KeyboardInterrupt:
+            print(Fore.YELLOW + "\\n\\nProgramm durch Benutzerabbruch beendet. Tschüss!")
+            break
+        except Exception as e:
+            print(Fore.RED + f"❌ Unerwarteter Fehler: {str(e)}")
+            print(Fore.YELLOW + "   Versuche das Programm neu zu starten")
+            
+    print(Fore.MAGENTA + "\\n" + "="*50)
+    print(Fore.MAGENTA + " Denk daran: Mit großer Macht kommt große Verantwortung!")
+    print(Fore.MAGENTA + " Im Zweifel: Lass es sein und hole dir eine Autorisierung!")
+    print(Fore.MAGENTA + "="*50)
+PYTHON_EOF
+
+# Erstelle requirements.txt
+cat > requirements.txt << EOF
+requests
+python-dotenv
+colorama
+openai
+EOF
+
+# Mache das Skript ausführbar
+chmod +x HacxGPT.py
+
+# Installiere Abhängigkeiten
+pip install --no-cache-dir -r requirements.txt >/dev/null 2>&1
+
+# Fertigstellung
+echo "\\n${Fore.MAGENTA}=========================================="
+echo "${Fore.MAGENTA} Installation abgeschlossen! ${Fore.GREEN}✓"
+echo "${Fore.MAGENTA}=========================================="
+echo "${Fore.CYAN}So verwendest du CyberSecGPT:"
+echo "${Fore.YELLOW}1. Starte das Tool: ${Fore.GREEN}python3 ~/cybersec/HacxGPT.py"
+echo "${Fore.YELLOW}2. Wähle einen API-Anbieter und gib deinen Key ein"
+echo ""
+echo "${Fore.CYAN} Kostenlose API-Keys für Bildungszwecke:"
+echo "${Fore.BLUE}- OpenRouter: https://openrouter.ai (kostenloser Tier verfügbar)"
+echo "${Fore.BLUE}- DeepSeek: https://platform.deepseek.com (kostenlose Tiers verfügbar)"
+echo ""
+echo "${Fore.RED}⚠️ WICHTIG: Dieses Tool dient ausschließlich Bildungszwecken!"
+echo "${Fore.RED}   - Führe NIE Sicherheitstests ohne ausdrückliche Genehmigung durch"
+echo "${Fore.RED}   - Beachte das Telekommunikationsgesetz (TKG) und Strafgesetzbuch (StGB)"
+echo ""
+echo "${Fore.GREEN}Legale Alternativen für praktische Erfahrung:"
+echo "${Fore.CYAN}- TryHackMe (https://tryhackme.com)"
+echo "${Fore.CYAN}- Hack The Box (https://www.hackthebox.com)"
+echo "${Fore.CYAN}- PortSwigger Web Security Academy (https://portswigger.net/web-security)"
+echo ""
+echo "${Fore.MAGENTA}=========================================="
+echo "${Fore.MAGENTA} Sicherheit hat oberste Priorität - bleib legal! ${Fore.MAGENTA}"
+echo "${Fore.MAGENTA}=========================================="
+EOF
