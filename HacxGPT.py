@@ -46,7 +46,7 @@ _PROVIDERS = {
 API_PROVIDER = "openrouter"
 
 ##############  For DeepSeek api
-# API_PROVIDER = "deepseek"
+# API_PROVIDER = sk-84aa5843485745c8a9ea73c8a8a14ee5
 
 
 
