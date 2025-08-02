@@ -1,5 +1,38 @@
-openai>=1.0.0
+# iOS WiFi Exploit Demo Suite - Requirements
+# Educational Tool for MBA AI Studies
+
+# Core dependencies
+rich>=13.0.0
+scapy>=2.5.0
+flask>=2.3.0
+requests>=2.31.0
+
+# GUI and visualization
+tkinter-tooltip>=2.0.0
+pillow>=10.0.0
+
+# Network and security tools
+pyzbar>=0.1.9
+pdfminer.six>=20221105
+frida-tools>=12.0.0
+cryptography>=41.0.0
+
+# Additional utilities
 colorama>=0.4.6
 pwinput>=1.0.3
 python-dotenv>=1.0.0
-rich>=13.3.5
+
+# Development and testing (optional)
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
+
+# Documentation
+sphinx>=7.0.0
+sphinx-rtd-theme>=1.3.0
+
+# Note: Some system-level dependencies may be required:
+# - gcc (for compiling C simulator)
+# - libgl1-mesa-glx (for GUI)
+# - libglib2.0-0 (for system libraries)
+# - libssl-dev (for cryptography)
