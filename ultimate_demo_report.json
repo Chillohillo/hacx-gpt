@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-03T01:14:09.291119",
+  "timestamp": "2025-08-03T01:27:09.932534",
   "target_device": {
     "ip": "192.168.1.100",
     "mac": "AA:BB:CC:DD:EE:01",
@@ -115,200 +115,200 @@
       "cve": "CVE-2024-23218",
       "target": "iPhone-15-Pro-Max",
       "status": "success",
-      "timestamp": "2025-08-03T01:13:36.264085"
+      "timestamp": "2025-08-03T01:26:36.902846"
     },
     {
       "cve": "CVE-2024-23225",
       "target": "iPhone-15-Pro-Max",
       "status": "success",
-      "timestamp": "2025-08-03T01:13:38.064864"
+      "timestamp": "2025-08-03T01:26:38.703774"
     },
     {
       "cve": "CVE-2024-23222",
       "target": "iPhone-15-Pro-Max",
       "status": "success",
-      "timestamp": "2025-08-03T01:13:39.865703"
+      "timestamp": "2025-08-03T01:26:40.504501"
     },
     {
       "cve": "CVE-2024-23221",
       "target": "iPhone-15-Pro-Max",
       "status": "success",
-      "timestamp": "2025-08-03T01:13:41.666588"
+      "timestamp": "2025-08-03T01:26:42.305375"
     },
     {
       "cve": "CVE-2024-23224",
       "target": "iPhone-15-Pro-Max",
       "status": "success",
-      "timestamp": "2025-08-03T01:13:43.467374"
+      "timestamp": "2025-08-03T01:26:44.106285"
     },
     {
       "cve": "CVE-2024-23223",
       "target": "iPhone-15-Pro-Max",
       "status": "success",
-      "timestamp": "2025-08-03T01:13:45.268125"
+      "timestamp": "2025-08-03T01:26:45.907081"
     },
     {
       "cve": "CVE-2024-23220",
       "target": "iPhone-15-Pro-Max",
       "status": "success",
-      "timestamp": "2025-08-03T01:13:47.068912"
+      "timestamp": "2025-08-03T01:26:47.707858"
     },
     {
       "cve": "CVE-2024-23219",
       "target": "iPhone-15-Pro-Max",
       "status": "success",
-      "timestamp": "2025-08-03T01:13:48.869696"
+      "timestamp": "2025-08-03T01:26:49.508617"
     }
   ],
   "surveillance_data": {
     "screen_recording": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:54.672622",
+      "activated_at": "2025-08-03T01:26:55.311848",
       "data_collected": []
     },
     "screenshot_capture": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:55.073288",
+      "activated_at": "2025-08-03T01:26:55.712304",
       "data_collected": []
     },
     "webcam_access": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:55.473776",
+      "activated_at": "2025-08-03T01:26:56.112800",
       "data_collected": []
     },
     "microphone_access": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:55.874341",
+      "activated_at": "2025-08-03T01:26:56.513316",
       "data_collected": []
     },
     "keylogging": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:56.274747",
+      "activated_at": "2025-08-03T01:26:56.913843",
       "data_collected": []
     },
     "clipboard_monitoring": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:56.675159",
+      "activated_at": "2025-08-03T01:26:57.314377",
       "data_collected": []
     },
     "file_system_access": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:57.075724",
+      "activated_at": "2025-08-03T01:26:57.715069",
       "data_collected": []
     },
     "process_monitoring": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:57.476583",
+      "activated_at": "2025-08-03T01:26:58.115615",
       "data_collected": []
     },
     "gps_location_tracking": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:57.877161",
+      "activated_at": "2025-08-03T01:26:58.516163",
       "data_collected": []
     },
     "wifi_location_tracking": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:58.277757",
+      "activated_at": "2025-08-03T01:26:58.916732",
       "data_collected": []
     },
     "bluetooth_tracking": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:58.678366",
+      "activated_at": "2025-08-03T01:26:59.317236",
       "data_collected": []
     },
     "movement_history": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:59.078925",
+      "activated_at": "2025-08-03T01:26:59.717731",
       "data_collected": []
     },
     "real_time_location": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:59.479447",
+      "activated_at": "2025-08-03T01:27:00.118204",
       "data_collected": []
     },
     "geofencing": {
       "status": "active",
-      "activated_at": "2025-08-03T01:13:59.880111",
+      "activated_at": "2025-08-03T01:27:00.518874",
       "data_collected": []
     },
     "imessage_monitoring": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:00.280740",
+      "activated_at": "2025-08-03T01:27:00.919419",
       "data_collected": []
     },
     "sms_interception": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:00.681359",
+      "activated_at": "2025-08-03T01:27:01.319910",
       "data_collected": []
     },
     "call_recording": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:01.082051",
+      "activated_at": "2025-08-03T01:27:01.720559",
       "data_collected": []
     },
     "facetime_monitoring": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:01.482487",
+      "activated_at": "2025-08-03T01:27:02.121084",
       "data_collected": []
     },
     "email_interception": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:01.883065",
+      "activated_at": "2025-08-03T01:27:02.521582",
       "data_collected": []
     },
     "social_media_monitoring": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:02.283583",
+      "activated_at": "2025-08-03T01:27:02.922133",
       "data_collected": []
     },
     "browser_history": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:02.684069",
+      "activated_at": "2025-08-03T01:27:03.322638",
       "data_collected": []
     },
     "app_communication_logs": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:03.084650",
+      "activated_at": "2025-08-03T01:27:03.723151",
       "data_collected": []
     },
     "contact_list_extraction": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:03.485141",
+      "activated_at": "2025-08-03T01:27:04.123691",
       "data_collected": []
     },
     "photo_library_access": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:03.885655",
+      "activated_at": "2025-08-03T01:27:04.524468",
       "data_collected": []
     },
     "calendar_data_mining": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:04.286214",
+      "activated_at": "2025-08-03T01:27:04.924990",
       "data_collected": []
     },
     "health_data_access": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:04.686739",
+      "activated_at": "2025-08-03T01:27:05.325520",
       "data_collected": []
     },
     "app_usage_data": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:05.087229",
+      "activated_at": "2025-08-03T01:27:05.728638",
       "data_collected": []
     },
     "device_settings": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:05.487911",
+      "activated_at": "2025-08-03T01:27:06.129295",
       "data_collected": []
     },
     "backup_data_access": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:05.888515",
+      "activated_at": "2025-08-03T01:27:06.529786",
       "data_collected": []
     },
     "icloud_sync_data": {
       "status": "active",
-      "activated_at": "2025-08-03T01:14:06.289002",
+      "activated_at": "2025-08-03T01:27:06.930315",
       "data_collected": []
     }
   },
