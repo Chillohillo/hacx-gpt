@@ -1,0 +1,795 @@
+{
+  "generated_date": "2025-08-03T10:43:28.859078",
+  "ios_version": "18.6",
+  "total_cves": 10,
+  "critical_cves": 6,
+  "unpatched_cves": 10,
+  "exploit_available": 10,
+  "zero_click_cves": 2,
+  "cve_summary": {
+    "critical": [
+      {
+        "title": "WebKit Type Confusion in Safari",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-15",
+        "description": "Type confusion vulnerability in WebKit JavaScript engine allowing arbitrary code execution via crafted web content",
+        "exploit_type": "webkit_type_confusion",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5",
+          "iOS 18.4"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WebKit JavaScript Engine",
+          "attack_vector": "Web Content",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23225"
+      },
+      {
+        "title": "Kernel Memory Corruption",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-12",
+        "description": "Kernel memory corruption vulnerability allowing privilege escalation via crafted input",
+        "exploit_type": "kernel_memory_corruption",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "iOS Kernel",
+          "attack_vector": "Local",
+          "privilege_required": "Low",
+          "user_interaction": "Required",
+          "impact": "Privilege Escalation"
+        },
+        "cve_id": "CVE-2024-23224"
+      },
+      {
+        "title": "iMessage Arbitrary Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-08",
+        "description": "Arbitrary code execution vulnerability in iMessage via crafted message",
+        "exploit_type": "imessage_code_execution",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "iMessage",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23222"
+      },
+      {
+        "title": "FaceTime Arbitrary Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-05",
+        "description": "Arbitrary code execution via FaceTime call with crafted video data",
+        "exploit_type": "facetime_code_execution",
+        "affected_versions": [
+          "iOS 18.6"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "FaceTime",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23221"
+      },
+      {
+        "title": "WiFi Arbitrary Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2023-12-28",
+        "description": "Arbitrary code execution via crafted WiFi packet",
+        "exploit_type": "wifi_code_execution",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WiFi Stack",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "None",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23218"
+      },
+      {
+        "title": "Mail App Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2023-12-22",
+        "description": "Arbitrary code execution in Mail app via crafted email",
+        "exploit_type": "mail_code_execution",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "Mail App",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23216"
+      }
+    ],
+    "unpatched": [
+      {
+        "title": "WebKit Type Confusion in Safari",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-15",
+        "description": "Type confusion vulnerability in WebKit JavaScript engine allowing arbitrary code execution via crafted web content",
+        "exploit_type": "webkit_type_confusion",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5",
+          "iOS 18.4"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WebKit JavaScript Engine",
+          "attack_vector": "Web Content",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23225"
+      },
+      {
+        "title": "Kernel Memory Corruption",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-12",
+        "description": "Kernel memory corruption vulnerability allowing privilege escalation via crafted input",
+        "exploit_type": "kernel_memory_corruption",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "iOS Kernel",
+          "attack_vector": "Local",
+          "privilege_required": "Low",
+          "user_interaction": "Required",
+          "impact": "Privilege Escalation"
+        },
+        "cve_id": "CVE-2024-23224"
+      },
+      {
+        "title": "WebKit Type Confusion in JavaScript",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-10",
+        "description": "Type confusion in WebKit JavaScript engine leading to memory corruption",
+        "exploit_type": "webkit_type_confusion",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5",
+          "iOS 18.4"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WebKit JavaScript Engine",
+          "attack_vector": "Web Content",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Memory Corruption"
+        },
+        "cve_id": "CVE-2024-23223"
+      },
+      {
+        "title": "iMessage Arbitrary Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-08",
+        "description": "Arbitrary code execution vulnerability in iMessage via crafted message",
+        "exploit_type": "imessage_code_execution",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "iMessage",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23222"
+      },
+      {
+        "title": "FaceTime Arbitrary Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-05",
+        "description": "Arbitrary code execution via FaceTime call with crafted video data",
+        "exploit_type": "facetime_code_execution",
+        "affected_versions": [
+          "iOS 18.6"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "FaceTime",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23221"
+      },
+      {
+        "title": "Kernel Privilege Escalation",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-03",
+        "description": "Kernel privilege escalation via crafted syscall",
+        "exploit_type": "kernel_privilege_escalation",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "iOS Kernel",
+          "attack_vector": "Local",
+          "privilege_required": "Low",
+          "user_interaction": "Required",
+          "impact": "Privilege Escalation"
+        },
+        "cve_id": "CVE-2024-23220"
+      },
+      {
+        "title": "Safari Sandbox Escape",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-01",
+        "description": "Safari sandbox escape via crafted webpage",
+        "exploit_type": "safari_sandbox_escape",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "Safari",
+          "attack_vector": "Web Content",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Sandbox Escape"
+        },
+        "cve_id": "CVE-2024-23219"
+      },
+      {
+        "title": "WiFi Arbitrary Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2023-12-28",
+        "description": "Arbitrary code execution via crafted WiFi packet",
+        "exploit_type": "wifi_code_execution",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WiFi Stack",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "None",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23218"
+      },
+      {
+        "title": "Bluetooth Memory Corruption",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2023-12-25",
+        "description": "Memory corruption in Bluetooth stack via crafted packet",
+        "exploit_type": "bluetooth_memory_corruption",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "Bluetooth Stack",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "None",
+          "impact": "Memory Corruption"
+        },
+        "cve_id": "CVE-2024-23217"
+      },
+      {
+        "title": "Mail App Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2023-12-22",
+        "description": "Arbitrary code execution in Mail app via crafted email",
+        "exploit_type": "mail_code_execution",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "Mail App",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23216"
+      }
+    ],
+    "exploit_available": [
+      {
+        "title": "WebKit Type Confusion in Safari",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-15",
+        "description": "Type confusion vulnerability in WebKit JavaScript engine allowing arbitrary code execution via crafted web content",
+        "exploit_type": "webkit_type_confusion",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5",
+          "iOS 18.4"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WebKit JavaScript Engine",
+          "attack_vector": "Web Content",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23225"
+      },
+      {
+        "title": "Kernel Memory Corruption",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-12",
+        "description": "Kernel memory corruption vulnerability allowing privilege escalation via crafted input",
+        "exploit_type": "kernel_memory_corruption",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "iOS Kernel",
+          "attack_vector": "Local",
+          "privilege_required": "Low",
+          "user_interaction": "Required",
+          "impact": "Privilege Escalation"
+        },
+        "cve_id": "CVE-2024-23224"
+      },
+      {
+        "title": "WebKit Type Confusion in JavaScript",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-10",
+        "description": "Type confusion in WebKit JavaScript engine leading to memory corruption",
+        "exploit_type": "webkit_type_confusion",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5",
+          "iOS 18.4"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WebKit JavaScript Engine",
+          "attack_vector": "Web Content",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Memory Corruption"
+        },
+        "cve_id": "CVE-2024-23223"
+      },
+      {
+        "title": "iMessage Arbitrary Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-08",
+        "description": "Arbitrary code execution vulnerability in iMessage via crafted message",
+        "exploit_type": "imessage_code_execution",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "iMessage",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23222"
+      },
+      {
+        "title": "FaceTime Arbitrary Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-05",
+        "description": "Arbitrary code execution via FaceTime call with crafted video data",
+        "exploit_type": "facetime_code_execution",
+        "affected_versions": [
+          "iOS 18.6"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "FaceTime",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23221"
+      },
+      {
+        "title": "Kernel Privilege Escalation",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-03",
+        "description": "Kernel privilege escalation via crafted syscall",
+        "exploit_type": "kernel_privilege_escalation",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "iOS Kernel",
+          "attack_vector": "Local",
+          "privilege_required": "Low",
+          "user_interaction": "Required",
+          "impact": "Privilege Escalation"
+        },
+        "cve_id": "CVE-2024-23220"
+      },
+      {
+        "title": "Safari Sandbox Escape",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-01",
+        "description": "Safari sandbox escape via crafted webpage",
+        "exploit_type": "safari_sandbox_escape",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "Safari",
+          "attack_vector": "Web Content",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Sandbox Escape"
+        },
+        "cve_id": "CVE-2024-23219"
+      },
+      {
+        "title": "WiFi Arbitrary Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2023-12-28",
+        "description": "Arbitrary code execution via crafted WiFi packet",
+        "exploit_type": "wifi_code_execution",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WiFi Stack",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "None",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23218"
+      },
+      {
+        "title": "Bluetooth Memory Corruption",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2023-12-25",
+        "description": "Memory corruption in Bluetooth stack via crafted packet",
+        "exploit_type": "bluetooth_memory_corruption",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "Bluetooth Stack",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "None",
+          "impact": "Memory Corruption"
+        },
+        "cve_id": "CVE-2024-23217"
+      },
+      {
+        "title": "Mail App Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2023-12-22",
+        "description": "Arbitrary code execution in Mail app via crafted email",
+        "exploit_type": "mail_code_execution",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "Mail App",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23216"
+      }
+    ],
+    "webkit": [
+      {
+        "title": "WebKit Type Confusion in Safari",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-15",
+        "description": "Type confusion vulnerability in WebKit JavaScript engine allowing arbitrary code execution via crafted web content",
+        "exploit_type": "webkit_type_confusion",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5",
+          "iOS 18.4"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WebKit JavaScript Engine",
+          "attack_vector": "Web Content",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23225"
+      },
+      {
+        "title": "WebKit Type Confusion in JavaScript",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-10",
+        "description": "Type confusion in WebKit JavaScript engine leading to memory corruption",
+        "exploit_type": "webkit_type_confusion",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5",
+          "iOS 18.4"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WebKit JavaScript Engine",
+          "attack_vector": "Web Content",
+          "privilege_required": "None",
+          "user_interaction": "Required",
+          "impact": "Memory Corruption"
+        },
+        "cve_id": "CVE-2024-23223"
+      }
+    ],
+    "kernel": [
+      {
+        "title": "Kernel Memory Corruption",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-12",
+        "description": "Kernel memory corruption vulnerability allowing privilege escalation via crafted input",
+        "exploit_type": "kernel_memory_corruption",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "iOS Kernel",
+          "attack_vector": "Local",
+          "privilege_required": "Low",
+          "user_interaction": "Required",
+          "impact": "Privilege Escalation"
+        },
+        "cve_id": "CVE-2024-23224"
+      },
+      {
+        "title": "Kernel Privilege Escalation",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2024-01-03",
+        "description": "Kernel privilege escalation via crafted syscall",
+        "exploit_type": "kernel_privilege_escalation",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "iOS Kernel",
+          "attack_vector": "Local",
+          "privilege_required": "Low",
+          "user_interaction": "Required",
+          "impact": "Privilege Escalation"
+        },
+        "cve_id": "CVE-2024-23220"
+      }
+    ],
+    "zero_click": [
+      {
+        "title": "WiFi Arbitrary Code Execution",
+        "severity": "Critical",
+        "cvss_score": "9.8",
+        "status": "Unpatched",
+        "discovery_date": "2023-12-28",
+        "description": "Arbitrary code execution via crafted WiFi packet",
+        "exploit_type": "wifi_code_execution",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "WiFi Stack",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "None",
+          "impact": "Arbitrary Code Execution"
+        },
+        "cve_id": "CVE-2024-23218"
+      },
+      {
+        "title": "Bluetooth Memory Corruption",
+        "severity": "High",
+        "cvss_score": "8.8",
+        "status": "Unpatched",
+        "discovery_date": "2023-12-25",
+        "description": "Memory corruption in Bluetooth stack via crafted packet",
+        "exploit_type": "bluetooth_memory_corruption",
+        "affected_versions": [
+          "iOS 18.6",
+          "iOS 18.5"
+        ],
+        "exploit_available": true,
+        "public_exploit": false,
+        "patch_status": "Not Available",
+        "technical_details": {
+          "component": "Bluetooth Stack",
+          "attack_vector": "Network",
+          "privilege_required": "None",
+          "user_interaction": "None",
+          "impact": "Memory Corruption"
+        },
+        "cve_id": "CVE-2024-23217"
+      }
+    ]
+  }
+}
