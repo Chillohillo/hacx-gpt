@@ -1,0 +1,286 @@
+{
+  "timestamp": "2025-08-02T21:46:37.490806",
+  "remote_access_summary": {
+    "total_sessions": 15,
+    "screen_recordings": 1,
+    "keystrokes_captured": 5,
+    "locations_tracked": 5,
+    "calls_monitored": 4,
+    "messages_intercepted": 5
+  },
+  "screen_recording_data": [
+    {
+      "target": "iPhone-15-Pro-Max",
+      "duration": "2 hours 15 minutes",
+      "resolution": "1920x1080",
+      "fps": 30,
+      "format": "H.264",
+      "size": "1.2 GB",
+      "frames_captured": 243000,
+      "screenshots": [
+        "home_screen.png",
+        "safari_browsing.png",
+        "imessage_conversation.png",
+        "camera_app.png",
+        "settings_app.png"
+      ]
+    }
+  ],
+  "keylog_data": [
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:23:15",
+      "app": "Safari",
+      "keys": "https://google.com"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:23:45",
+      "app": "Safari",
+      "keys": "password123"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:24:12",
+      "app": "iMessage",
+      "keys": "Hello, how are you?"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:25:03",
+      "app": "Settings",
+      "keys": "wifi_password"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:26:18",
+      "app": "Gmail",
+      "keys": "user@gmail.com"
+    }
+  ],
+  "location_data": [
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:20:00",
+      "lat": 40.7128,
+      "lon": -74.006,
+      "accuracy": 5,
+      "location": "New York, NY"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:25:00",
+      "lat": 40.7589,
+      "lon": -73.9851,
+      "accuracy": 3,
+      "location": "Times Square"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:30:00",
+      "lat": 40.7505,
+      "lon": -73.9934,
+      "accuracy": 8,
+      "location": "Penn Station"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:35:00",
+      "lat": 40.7484,
+      "lon": -73.9857,
+      "accuracy": 4,
+      "location": "Madison Square Garden"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:40:00",
+      "lat": 40.7527,
+      "lon": -73.9772,
+      "accuracy": 6,
+      "location": "Grand Central Terminal"
+    }
+  ],
+  "call_logs": [
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:15:00",
+      "number": "+1-555-0123",
+      "duration": "5:23",
+      "type": "incoming",
+      "contact": "Mom"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:22:00",
+      "number": "+1-555-0456",
+      "duration": "2:15",
+      "type": "outgoing",
+      "contact": "Dad"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:28:00",
+      "number": "+1-555-0789",
+      "duration": "8:42",
+      "type": "incoming",
+      "contact": "Friend"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:35:00",
+      "number": "+1-555-0321",
+      "duration": "1:30",
+      "type": "outgoing",
+      "contact": "Work"
+    }
+  ],
+  "message_logs": [
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:16:00",
+      "app": "iMessage",
+      "contact": "Mom",
+      "content": "Are you coming home for dinner?",
+      "type": "received"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:17:00",
+      "app": "iMessage",
+      "contact": "Mom",
+      "content": "Yes, I'll be there at 6",
+      "type": "sent"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:18:00",
+      "app": "WhatsApp",
+      "contact": "Friend",
+      "content": "Let's meet at the mall",
+      "type": "received"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:19:00",
+      "app": "WhatsApp",
+      "contact": "Friend",
+      "content": "Sure, what time?",
+      "type": "sent"
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "timestamp": "14:20:00",
+      "app": "SMS",
+      "contact": "Bank",
+      "content": "Your account balance is $1,234.56",
+      "type": "received"
+    }
+  ],
+  "access_sessions": [
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Screen Recording",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:34.488435",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Keylogging",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:34.688644",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Location Tracking",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:34.888819",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Call Monitoring",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:35.088963",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Message Interception",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:35.289090",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "App Usage Tracking",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:35.489251",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "File System Access",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:35.689372",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Camera Access",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:35.889503",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Microphone Access",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:36.089641",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Contact List Access",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:36.289808",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Calendar Access",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:36.489929",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Photo Library Access",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:36.690093",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Safari History Access",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:36.890280",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "App Store Activity",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:37.090406",
+      "data_collected": []
+    },
+    {
+      "target": "iPhone-15-Pro-Max",
+      "method": "Health Data Access",
+      "status": "active",
+      "timestamp": "2025-08-02 21:46:37.290524",
+      "data_collected": []
+    }
+  ]
+}

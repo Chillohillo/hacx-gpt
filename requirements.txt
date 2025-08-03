@@ -1,5 +1,41 @@
-openai>=1.0.0
-colorama>=0.4.6
-pwinput>=1.0.3
-python-dotenv>=1.0.0
-rich>=13.3.5
+# iOS WiFi Security Demonstration Tool Requirements
+# MBA AI Study Project - Educational Purpose Only
+
+# Core Python packages (usually included with Python)
+# tkinter - GUI framework (included with Python)
+# json - JSON handling (included with Python)
+# datetime - Date/time handling (included with Python)
+# threading - Threading support (included with Python)
+# time - Time functions (included with Python)
+# os - Operating system interface (included with Python)
+# sys - System-specific parameters (included with Python)
+# argparse - Command line argument parsing (included with Python)
+# typing - Type hints (included with Python 3.5+)
+
+# Optional packages for enhanced functionality
+# These are not strictly required but may be useful for advanced features
+
+# For network scanning simulation (optional)
+# scapy>=2.4.5  # Network packet manipulation
+# netaddr>=0.8.0  # Network address manipulation
+
+# For GUI enhancements (optional)
+# pillow>=8.0.0  # Image processing for GUI
+# matplotlib>=3.3.0  # Plotting for network visualization
+
+# For report generation (optional)
+# jinja2>=3.0.0  # Template engine for reports
+# markdown>=3.3.0  # Markdown processing
+
+# For data visualization (optional)
+# pandas>=1.3.0  # Data analysis
+# numpy>=1.21.0  # Numerical computing
+
+# Note: The demonstration tools work with just the standard Python library
+# The above optional packages are only needed if you want to extend functionality
+
+# Installation instructions:
+# pip install -r requirements.txt
+# 
+# Or install only the core Python packages (which are usually pre-installed):
+# python3 -c "import tkinter, json, datetime, threading, time, os, sys, argparse, typing; print('All core packages available')"
