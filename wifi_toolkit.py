@@ -244,6 +244,8 @@ def simulate_attack(kind: str, interface: str):
         _simulate_evil_twin(interface)
     elif kind == "karma":
         _simulate_karma(interface)
+    elif kind == "awdl_zero_click":
+        _simulate_awdl_zero_click(interface)
     else:
         sys.exit("[!] Unknown attack kind – choose from: deauth | evil_twin | karma")
 
@@ -322,6 +324,73 @@ def _simulate_karma(iface: str):
         """
     ))
 
+
+def _simulate_awdl_zero_click(iface: str):
+    """Simulated *defensive* monitoring for an iOS/macOS AWDL zero-click RCE.
+
+    Apple Wireless Direct Link (AWDL) is a proprietary IEEE-802.11-based ad-hoc
+    protocol used by AirDrop, AirPlay, Sidecar and more. In 2020, Google’s
+    Project Zero disclosed a critical heap-overflow (see CVE-2020-3843) that
+    allowed *remote* code-execution on iOS *without any user interaction* as
+    soon as Wi-Fi was enabled – **a so-called zero-click exploit**.
+
+    This simulation does NOT exploit anything. Instead, it demonstrates how a
+    blue-team defender could *passively* monitor raw 802.11 action-frames on
+    the AWDL social channel (usually channel 44 / 5 GHz) and flag anomalies
+    such as unusually large payloads (> 600 bytes) that could indicate an
+    attempted heap-overflow.
+    """
+
+    _ensure_test_environment()
+
+    print(textwrap.dedent(
+        f"""
+        ------------------------------------------------------------
+        AWDL ZERO-CLICK MONITOR (Simulation)
+        ------------------------------------------------------------
+        The interface '{iface}' will be put into *monitor* mode (if not yet)
+        and scapy sniffing started for IEEE-802.11 action frames that match
+        the AWDL OUI (Apple, 00:17:F2) on the 5 GHz social channel. Suspicious
+        frames – e.g. payload length >600 bytes – are logged to STDOUT so you
+        can observe potential exploitation attempts in a *controlled* lab.
+
+        Stop the capture with CTRL-C.  No packets will be *transmitted* by
+        this module – it is purely passive.
+        """
+    ))
+
+    try:
+        from scapy.all import sniff, Dot11, RadioTap  # type: ignore
+    except ImportError:
+        print("[!] scapy not installed – passive monitoring unavailable")
+        return
+
+    def _awdl_filter(pkt):
+        if not pkt.haslayer(Dot11):
+            return False
+        dot11 = pkt[Dot11]
+        # Action frames (type=0, subtype=13) are used by AWDL for service discovery
+        if dot11.type == 0 and dot11.subtype == 13:
+            # OUI can be found in payload starting at fixed offset within the
+            # action frame. A quick & dirty heuristic:
+            raw = bytes(pkt[RadioTap].payload)
+            return b"\x00\x17\xF2" in raw  # Apple OUI
+        return False
+
+    def _process(pkt):
+        ts = datetime.utcnow().isoformat() + "Z"
+        length = len(pkt)
+        if length > 600:
+            print(f"[!] {ts} Suspect large AWDL action frame: {length} bytes from {pkt.addr2}")
+        else:
+            print(f"[+] {ts} AWDL action frame {length}B from {pkt.addr2}")
+
+    print("[*] Sniffing – press CTRL-C to stop …")
+    try:
+        sniff(iface=iface, prn=_process, lfilter=_awdl_filter, store=False)
+    except KeyboardInterrupt:
+        print("\n[✓] Capture stopped by user")
+
 ###############################################################################
 # Report generation                                                           #
 ###############################################################################
@@ -357,7 +426,16 @@ def build_cli() -> argparse.ArgumentParser:
 
     # simulate
     s = sub.add_parser("simulate", help="Run attack simulation stub")
-    s.add_argument("kind", choices=["deauth", "evil_twin", "karma"], help="Attack kind")
+    s.add_argument(
+        "kind",
+        choices=[
+            "deauth",
+            "evil_twin",
+            "karma",
+            "awdl_zero_click",
+        ],
+        help="Attack kind (including iOS AWDL zero-click monitor)",
+    )
     s.add_argument("-i", "--interface", required=True, help="Wireless interface in monitor mode")
 
     # report
