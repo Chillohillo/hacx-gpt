@@ -1,5 +1,25 @@
+# Core dependencies
 openai>=1.0.0
 colorama>=0.4.6
 pwinput>=1.0.3
 python-dotenv>=1.0.0
 rich>=13.3.5
+
+# Network scanning and analysis
+scapy>=2.5.0
+netifaces>=0.11.0
+
+# GUI and visualization
+matplotlib>=3.5.0
+tkinter  # Usually comes with Python
+
+# Report generation
+reportlab>=3.6.0
+
+# Additional security and network tools
+psutil>=5.9.0
+netaddr>=0.8.0
+pypcap>=1.2.3
+
+# Optional: For advanced WiFi analysis
+pywifi>=1.1.12
