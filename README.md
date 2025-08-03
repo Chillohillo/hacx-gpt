@@ -1,203 +1,352 @@
+# WiFi Security Research Toolkit
 
-***
+Ein umfassendes Python-Toolkit zur Erforschung von WiFi-Sicherheitslücken in Heimnetzwerken, mit besonderem Fokus auf iOS-Geräte. Entwickelt für Sicherheitsforscher, Penetration Tester und Bildungseinrichtungen.
 
-<div align="center">
+![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
+![License](https://img.shields.io/badge/license-Educational%20Use-green)
+![Platform](https://img.shields.io/badge/platform-Linux-lightgrey)
 
+## ⚠️ Wichtiger Hinweis
 
-  ![HacxGPT logo](https://github.com/BlackTechX011/Hacx-GPT/blob/main/img/HacxGPT.png)
+**Dieses Toolkit ist ausschließlich für autorisierte Sicherheitsforschung und Bildungszwecke bestimmt. Die Nutzung in nicht-autorisierten Umgebungen ist illegal und ethisch inakzeptabel.**
 
+## 🎯 Hauptfunktionen
 
-  # HacxGPT
+### 🔍 Netzwerkerkennung
+- **Automatisierte Geräteerkennung**: ARP-basierte Identifizierung aller Geräte im lokalen Netzwerk
+- **OS-Fingerprinting**: Spezielle Erkennung von iOS-Geräten und anderen Betriebssystemen
+- **WiFi-Scanning**: Umfassende Analyse von Access Points und deren Konfigurationen
+- **Vendor-Identifikation**: MAC-basierte Herstellererkennung
 
-  <p>
-    <strong>An advanced AI framework inspired by WormGPT, engineered to explore the frontiers of language model interactions.</strong>
-  </p>
-  
-  <!-- Badges -->
-  <p>
-    <a href="https://github.com/BlackTechX011/Hacx-GPT" title="View on GitHub"><img src="https://img.shields.io/static/v1?label=BlackTechX&message=Hacx-GPT&color=blue&logo=github" alt="BlackTechX - Hacx-GPT"></a>
-    <a href="https://github.com/BlackTechX011/Hacx-GPT/stargazers"><img src="https://img.shields.io/github/stars/BlackTechX011/Hacx-GPT?style=social" alt="GitHub Stars"></a>
-    <a href="https://github.com/BlackTechX011/Hacx-GPT/network/members"><img src="https://img.shields.io/github/forks/BlackTechX011/Hacx-GPT?style=social" alt="GitHub Forks"></a>
-    <br>
-    <img src="https://img.shields.io/github/last-commit/BlackTechX011/Hacx-GPT?color=green&logo=github" alt="Last Commit">
-    <img src="https://img.shields.io/github/license/BlackTechX011/Hacx-GPT?color=red" alt="License">
-  </p>
-   
-  <h4>
-    <a href="https://github.com/BlackTechX011/">GitHub</a>
-    <span> · </span>
-    <a href="https://www.instagram.com/BlackTechX011/">Instagram</a>
-    <span> · </span>
-    <a href="https://x.com/BlackTechX011">X (Twitter)</a>
-    <span> · </span>
-    <a href="https://www.youtube.com/@BlackTechX_">YouTube</a>
-  </h4>
-</div>
+### 🛡️ Sicherheitsanalyse
+- **Schwachstellenerkennung**: Automatisierte Identifizierung von Sicherheitslücken
+- **Konfigurationsprüfung**: Analyse von Router- und Client-Konfigurationen
+- **Verschlüsselungsanalyse**: Bewertung der verwendeten Verschlüsselungsverfahren
+- **Korrelationsanalyse**: Verknüpfung von Schwachstellen zwischen Geräten
 
----
+### 🎭 Angriffssimulationen (Nur in Testumgebungen)
+- **Deauthentication Attacks**: Simulation von Verbindungsunterbrechungen
+- **Evil Twin Access Points**: Demonstration von Rogue AP-Angriffen
+- **Karma Attacks**: Analyse automatischer Verbindungsversuche
+- **Sicherheitsmechanismen**: Automatische Deaktivierung außerhalb von Testumgebungen
 
-## 🚀 Showcase
+### 📊 Berichtssystem
+- **JSON-Reports**: Strukturierte, maschinenlesbare Berichte
+- **PDF-Dokumentation**: Professionelle Sicherheitsberichte
+- **Echtzeitanalyse**: Live-Monitoring und -Analyse
+- **Visualisierung**: Netzwerktopologie und Schwachstellenheatmaps
 
-Here is a glimpse of the HacxGPT framework in action.
+## 🚀 Installation
 
-![HacxGPT Demo Screenshot](https://github.com/BlackTechX011/Hacx-GPT/blob/main/img/home.png)
+### Systemanforderungen
+- **Betriebssystem**: Linux (Ubuntu 20.04+ empfohlen)
+- **Python**: 3.8 oder höher
+- **Netzwerk**: WiFi-Adapter mit Monitor-Mode-Unterstützung
+- **Berechtigungen**: Root-Zugriff für Netzwerkoperationen
 
+### Schritt-für-Schritt Installation
 
-
----
-
-## :notebook_with_decorative_cover: Table of Contents
-
-- [About The Project](#star2-about-the-project)
-  - [What is this Repository?](#grey_question-what-is-this-repository)
-  - [The Real HacxGPT: Our Private Model](#gem-the-real-hacxgpt-our-private-model)
-- [Features](#dart-features)
-- [Getting Started](#electric_plug-getting-started)
-  - [Prerequisites: API Key](#key-prerequisites-api-key)
-  - [Installation](#gear-installation)
-- [Configuration](#wrench-configuration)
-- [Usage](#eyes-usage)
-- [Contributing](#wave-contributing)
-- [License](#warning-license)
-
----
-
-## :star2: About The Project
-
-HacxGPT is designed to provide powerful, unrestricted, and seamless AI-driven conversations, pushing the boundaries of what is possible with natural language processing.
-
-### :grey_question: What is this Repository?
-
-This repository contains an open-source framework that demonstrates the *concept* of HacxGPT. It utilizes external, third-party APIs from providers like **OpenRouter** or **DeepSeek** and combines them with a specialized system prompt. This allows a standard Large Language Model (LLM) to behave in a manner similar to our private HacxGPT, offering a preview of its capabilities.
-
-**It is important to understand:** This code is a wrapper and a proof-of-concept, not the core, fine-tuned HacxGPT model itself.
-
-### :gem: The Real HacxGPT: Our Private Model
-
-While this repository offers a glimpse into HacxGPT's potential, our flagship offering is a **privately-developed, fine-tuned Large Language Model.**
-
-Why choose our private model?
-- **Ground-Up Development:** We've trained our model using advanced techniques similar to the DeepSeek methodology, focusing on pre-training, Supervised Fine-Tuning (SFT), and Reinforcement Learning (RL).
-- **Superior Performance:** The private model is significantly more intelligent, coherent, and capable than what can be achieved with a simple system prompt on a public API.
-- **Enhanced Security & Privacy:** Offered as a private, managed service to ensure security and prevent misuse.
-- **True Unrestricted Power:** Built from the core to handle a wider and more complex range of tasks without the limitations of public models.
-
-#### How to Access the Private Model
-
-Access to our private model is exclusive. To inquire about services and pricing, please contact our team via Telegram.
-
-➡️ **Join our Telegram Channel for more info:** [https://t.me/HacxGPT](https://t.me/HacxGPT)
-
----
-
-## :dart: Features
-
-- **Powerful AI Conversations:** Get intelligent and context-aware answers to your queries.
-- **Unrestricted Framework:** A system prompt designed to bypass conventional AI limitations.
-- **Easy-to-Use CLI:** A clean and simple command-line interface for smooth interaction.
-- **Cross-Platform:** Tested and working on Kali Linux, Ubuntu, and Termux.
-
----
-
-## :electric_plug: Getting Started
-
-Follow these steps to get the HacxGPT framework running on your system.
-
-### :key: Prerequisites: API Key
-
-To use this framework, you **must** obtain an API key from a supported provider. These services offer free tiers that are perfect for getting started.
-
-1.  **Choose a provider:**
-    *   **OpenRouter:** Visit [OpenRouter.ai](https://openrouter.ai/keys) to get a free API key. They provide access to a variety of models.
-    *   **DeepSeek:** Visit the [DeepSeek Platform](https://platform.deepseek.com/api_keys) for a free API key to use their powerful models.
-
-2.  **Copy your API key.** You will need to paste it into the script when prompted during the first run.
-
-### :gear: Installation
-
-We provide simple, one-command installation scripts for your convenience.
-
-#### **Windows**
-1. Download the `install.bat` script from this repository.
-2. Double-click the file to run it. It will automatically clone the repository and install all dependencies.
-
-#### **Linux / Termux**
-1. Open your terminal.
-2. Run the following command. It will download the installer, make it executable, and run it for you.
-   ```bash
-   bash <(curl -s https://raw.githubusercontent.com/BlackTechX011/Hacx-GPT/main/install.sh)
-   ```
-
-<details>
-<summary>Manual Installation (Alternative)</summary>
-
-If you prefer to install manually, follow these steps.
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/BlackTechX011/Hacx-GPT.git
-    ```
-2.  **Navigate to the directory:**
-    ```bash
-    cd Hacx-GPT
-    ```
-3.  **Install Python dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-</details>
-
----
-
-## :wrench: Configuration
-
-You can easily switch between API providers.
-
-1.  Open the `HacxGPT.py` file in a text editor.
-2.  Locate the `API_PROVIDER` variable at the top of the file.
-3.  Change the value to either `"openrouter"` or `"deepseek"`.
-
-    ```python
-    # HacxGPT.py
-
-    # Change this value to "deepseek" or "openrouter"
-    API_PROVIDER = "openrouter" 
-    ```
-4. Save the file. The script will now use the selected provider's API.
-
----
-
-## :eyes: Usage
-
-Once installation and configuration are complete, run the application with this simple command:
-
+1. **Repository klonen**
 ```bash
-python3 HacxGPT.py
+git clone https://github.com/your-repo/wifi-security-toolkit.git
+cd wifi-security-toolkit
 ```
 
-The first time you run it, you will be prompted to enter your API key. It will be saved locally for future sessions.
+2. **Abhängigkeiten installieren**
+```bash
+# Automatische Installation
+pip install -r requirements.txt
+
+# Oder manuell
+pip install scapy python-nmap matplotlib numpy reportlab psutil
+```
+
+3. **Systempakete installieren** (Ubuntu/Debian)
+```bash
+sudo apt update
+sudo apt install nmap aircrack-ng wireless-tools
+```
+
+4. **Berechtigungen setzen**
+```bash
+# WiFi-Adapter für Monitor-Mode vorbereiten
+sudo airmon-ng start wlan0
+```
+
+## 💻 Verwendung
+
+### Command Line Interface (CLI)
+
+#### Grundlegende Netzwerkerkennung
+```bash
+# Geräte im lokalen Netzwerk entdecken
+sudo python wifi_security_toolkit.py discover --range 192.168.1.0/24
+
+# WiFi-Netzwerke scannen
+sudo python wifi_security_toolkit.py scan --duration 60
+
+# Vollständiger Scan (Geräte + WiFi)
+sudo python wifi_security_toolkit.py analyze --range 192.168.1.0/24
+```
+
+#### Sicherheitsanalyse
+```bash
+# Umfassende Sicherheitsanalyse
+sudo python wifi_security_toolkit.py analyze --range 192.168.1.0/24
+
+# Berichte generieren
+python wifi_security_toolkit.py report --pdf
+```
+
+#### Angriffssimulationen (Nur in Testumgebungen)
+```bash
+# Deauthentication-Simulation
+sudo python wifi_security_toolkit.py attack --type deauth --target-bssid AA:BB:CC:DD:EE:FF
+
+# Evil Twin-Simulation
+sudo python wifi_security_toolkit.py attack --type eviltwin --target-ssid "TestNetwork"
+
+# Karma-Attack-Simulation
+sudo python wifi_security_toolkit.py attack --type karma
+```
+
+### Grafische Benutzeroberfläche (GUI)
+
+```bash
+# GUI starten
+sudo python wifi_security_toolkit.py gui
+```
+
+Die GUI bietet folgende Features:
+- **Interaktive Netzwerkkarte**: Visuelle Darstellung der Netzwerktopologie
+- **Echtzeitmonitoring**: Live-Updates während der Scans
+- **Schwachstellenvisualisierung**: Heatmaps und Diagramme
+- **Exportfunktionen**: Direkte Berichterstellung aus der GUI
+
+## 📁 Projektstruktur
+
+```
+wifi-security-toolkit/
+├── wifi_security_toolkit.py    # Hauptmodul mit CLI
+├── wifi_gui.py                 # GUI-Modul
+├── requirements.txt            # Python-Abhängigkeiten
+├── RESEARCH_METHODOLOGY.md     # Forschungsmethodik
+├── README.md                   # Diese Datei
+├── LICENSE.txt                 # Lizenzinformationen
+├── examples/                   # Beispielkonfigurationen
+│   ├── test_network_config.yaml
+│   └── research_protocol.md
+└── security_reports/           # Ausgabeverzeichnis (wird erstellt)
+    ├── *.json                  # JSON-Berichte
+    ├── *.pdf                   # PDF-Berichte
+    └── wifi_security.log       # Logdateien
+```
+
+## 🔧 Konfiguration
+
+### Testumgebung einrichten
+
+Das Toolkit funktioniert nur in autorisierten Testumgebungen. Folgende Indikatoren werden geprüft:
+
+```python
+# Automatische Erkennung von Testumgebungen
+TEST_NETWORK_SSIDS = ["TestLab-", "Research-", "Security-Test-"]
+AUTHORIZED_ENVIRONMENTS = ["192.168.1.0/24", "10.0.0.0/8", "172.16.0.0/12"]
+```
+
+### Beispiel-Testlabor
+
+```yaml
+# examples/test_network_config.yaml
+test_network:
+  name: "SecurityResearchLab"
+  ssid_prefix: "TestLab-"
+  isolated: true
+  
+access_points:
+  - ssid: "TestLab-WEP"
+    encryption: "WEP"
+    purpose: "Legacy encryption testing"
+  
+  - ssid: "TestLab-Open"
+    encryption: "None"
+    purpose: "Open network analysis"
+```
+
+## 📊 Ausgabeformate
+
+### JSON-Berichte
+```json
+{
+  "scan_info": {
+    "timestamp": "2024-01-15T10:30:00Z",
+    "devices_discovered": 12,
+    "access_points_found": 3,
+    "total_vulnerabilities": 8
+  },
+  "devices": {
+    "aa:bb:cc:dd:ee:ff": {
+      "ip": "192.168.1.100",
+      "vendor": "Apple",
+      "os_info": "iOS/macOS",
+      "vulnerabilities": [...]
+    }
+  },
+  "vulnerabilities_summary": {
+    "high_risk": 2,
+    "medium_risk": 4,
+    "low_risk": 2
+  }
+}
+```
+
+### PDF-Berichte
+- Executive Summary
+- Detaillierte Findings
+- Risikobewertung
+- Empfehlungen
+- Technische Details
+
+## 🛡️ Sicherheitsfeatures
+
+### Automatische Sicherheitsvalidierung
+```python
+def validate_environment():
+    """Prüft automatisch auf autorisierte Testumgebung"""
+    indicators = [
+        check_hostname_patterns(),      # "test", "lab", "research"
+        check_network_ssids(),          # TestLab-Präfixe
+        check_vm_environment(),         # VirtualBox, VMware
+        check_isolated_network()       # Keine Internet-Verbindung
+    ]
+    return any(indicators)
+```
+
+### Ethische Sicherheitsmaßnahmen
+- ✅ Automatische Deaktivierung außerhalb von Testumgebungen
+- ✅ Umfassendes Logging aller Aktivitäten
+- ✅ Nur Simulation von Angriffen, keine echten Exploits
+- ✅ Explizite Zustimmung für alle Tests erforderlich
+
+## 🔬 Forschungsanwendungen
+
+### iOS-spezifische Analyse
+```python
+# Beispiel: iOS-Geräteerkennung
+def identify_ios_devices(devices):
+    apple_ouis = ["00:23:12", "04:0C:CE", "08:74:02", "0C:74:C2"]
+    ios_devices = []
+    
+    for device in devices:
+        if any(device.mac.startswith(oui) for oui in apple_ouis):
+            device.os_type = "iOS/macOS"
+            ios_devices.append(device)
+    
+    return ios_devices
+```
+
+### Schwachstellenkorrelation
+- Analyse von Gerät-zu-AP-Schwachstellen
+- Kombinierte Risikobewerung
+- Angriffsketten-Identifikation
+
+## 📚 Dokumentation
+
+- **[RESEARCH_METHODOLOGY.md](RESEARCH_METHODOLOGY.md)**: Detaillierte Forschungsmethodik
+- **[examples/](examples/)**: Beispielkonfigurationen und Protokolle
+- **Inline-Dokumentation**: Umfassende Code-Kommentare
+
+## 🤝 Beitragen
+
+Wir freuen uns über Beiträge zur Verbesserung des Toolkits:
+
+1. Fork das Repository
+2. Erstelle einen Feature-Branch (`git checkout -b feature/AmazingFeature`)
+3. Committe deine Änderungen (`git commit -m 'Add some AmazingFeature'`)
+4. Push zum Branch (`git push origin feature/AmazingFeature`)
+5. Öffne einen Pull Request
+
+### Entwicklungsrichtlinien
+- **PEP-8 konform**: Code-Style nach Python-Standards
+- **Dokumentation**: Alle neuen Features dokumentieren
+- **Tests**: Unit-Tests für neue Funktionen
+- **Sicherheit**: Ethische Richtlinien beachten
+
+## 📄 Lizenz
+
+Dieses Projekt steht unter einer Educational Use License. Siehe [LICENSE.txt](LICENSE.txt) für Details.
+
+**Wichtige Einschränkungen:**
+- Nur für Bildungs- und Forschungszwecke
+- Keine kommerzielle Nutzung ohne explizite Genehmigung
+- Nur in autorisierten Testumgebungen verwenden
+
+## ⚖️ Rechtliche Hinweise
+
+### Haftungsausschluss
+Die Entwickler übernehmen keine Verantwortung für den Missbrauch dieses Tools. Nutzer sind verpflichtet:
+
+- Nur in autorisierten Umgebungen zu testen
+- Alle geltenden Gesetze zu beachten
+- Keine Schäden an fremden Systemen zu verursachen
+- Ethische Forschungsstandards einzuhalten
+
+### Compliance
+- **DSGVO-konform**: Keine Sammlung persönlicher Daten
+- **Forschungsethik**: Nach wissenschaftlichen Standards
+- **Responsible Disclosure**: Schwachstellen werden verantwortlich gemeldet
+
+## 🆘 Support und Hilfe
+
+### Häufige Probleme
+
+**Problem**: "Permission denied" bei Netzwerkoperationen
+```bash
+# Lösung: Root-Rechte verwenden
+sudo python wifi_security_toolkit.py scan
+```
+
+**Problem**: "Interface not found"
+```bash
+# Lösung: WiFi-Interface prüfen
+iwconfig
+# Interface für Monitor-Mode aktivieren
+sudo airmon-ng start wlan0
+```
+
+**Problem**: GUI startet nicht
+```bash
+# Lösung: Abhängigkeiten prüfen
+pip install matplotlib tkinter
+```
+
+### Community und Support
+- **Issues**: GitHub Issues für Bug Reports
+- **Diskussionen**: GitHub Discussions für Fragen
+- **Wiki**: Detaillierte Anleitungen und FAQs
+
+## 🔮 Roadmap
+
+### Version 2.0 (Geplant)
+- [ ] **Erweiterte iOS-Analyse**: Tiefere Analyse von iOS-spezifischen Schwachstellen
+- [ ] **Machine Learning**: Automatische Anomalieerkennung
+- [ ] **API-Integration**: RESTful API für externe Tools
+- [ ] **Mobile App**: Begleit-App für Feldforschung
+
+### Version 1.5 (In Entwicklung)
+- [ ] **Bluetooth-Analyse**: Erweiterung auf Bluetooth-Sicherheit
+- [ ] **Erweiterte Visualisierung**: 3D-Netzwerkkarten
+- [ ] **Plugin-System**: Erweiterbare Architektur
+- [ ] **Cloud-Integration**: Sichere Cloud-basierte Analysen
+
+## 📞 Kontakt
+
+- **Hauptentwickler**: Security Research Team
+- **E-Mail**: security-research@example.com
+- **GitHub**: [https://github.com/your-repo/wifi-security-toolkit](https://github.com/your-repo/wifi-security-toolkit)
 
 ---
 
-## :star: Star History
+**Entwickelt mit ❤️ für die Cybersecurity-Community**
 
-[![Star History Chart](https://api.star-history.com/svg?repos=BlackTechX011/Hacx-GPT&type=Date)](https://star-history.com/#BlackTechX011/Hacx-GPT&Date)
-
-
----
-
-## :wave: Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-<a href="https://github.com/BlackTechX011/Hacx-GPT/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=BlackTechX011/Hacx-GPT" />
-</a>
-
----
-
-## :warning: License
-
-Distributed under the Personal-Use Only License (PUOL) 1.0. See `LICENSE.txt` for more information.
-
-***
+*"Security through education, not exploitation"*
