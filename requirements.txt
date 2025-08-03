@@ -1,5 +1,25 @@
-openai>=1.0.0
-colorama>=0.4.6
-pwinput>=1.0.3
-python-dotenv>=1.0.0
-rich>=13.3.5
+# WiFi Security Research Toolkit Dependencies
+# Core networking and security libraries
+scapy>=2.4.5
+python-nmap>=0.7.1
+
+# GUI and visualization
+matplotlib>=3.5.0
+numpy>=1.21.0
+
+# Report generation
+reportlab>=3.6.0
+
+# System and utilities
+psutil>=5.8.0
+
+# Optional dependencies (install manually if needed)
+# For advanced network analysis:
+# netaddr>=0.8.0
+# pyshark>=0.4.6
+
+# For enhanced WiFi monitoring:
+# pywifi>=1.1.12
+
+# Development and testing
+pytest>=6.2.0

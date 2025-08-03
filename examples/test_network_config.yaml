@@ -1,0 +1,268 @@
+# WiFi Security Research Lab Configuration
+# Example configuration for a controlled test environment
+
+test_environment:
+  name: "WiFi Security Research Lab"
+  description: "Controlled environment for WiFi security research"
+  version: "1.0"
+  created: "2024-01-15"
+  
+network_configuration:
+  # Test network identifiers
+  authorized_ssid_prefixes:
+    - "TestLab-"
+    - "Research-"
+    - "Security-Test-"
+    - "Lab-WiFi-"
+  
+  # Network ranges for testing
+  test_ranges:
+    - "192.168.100.0/24"  # Primary test range
+    - "10.0.100.0/24"     # Secondary test range
+    - "172.16.100.0/24"   # Tertiary test range
+  
+  # Isolation settings
+  isolation:
+    internet_access: false
+    vlan_id: 100
+    firewall_rules: "strict"
+
+# Test Access Points Configuration
+access_points:
+  # Legacy WEP Access Point
+  - name: "legacy_wep"
+    ssid: "TestLab-WEP"
+    bssid: "00:11:22:33:44:55"
+    channel: 6
+    encryption: "WEP"
+    key: "1234567890"
+    purpose: "Testing WEP vulnerabilities"
+    expected_vulnerabilities:
+      - "Weak encryption"
+      - "Key recovery attacks"
+    
+  # Open Network Access Point
+  - name: "open_network"
+    ssid: "TestLab-Open"
+    bssid: "00:11:22:33:44:56"
+    channel: 1
+    encryption: "None"
+    purpose: "Testing open network risks"
+    expected_vulnerabilities:
+      - "No encryption"
+      - "Traffic interception"
+    
+  # WPA2 with weak password
+  - name: "weak_wpa2"
+    ssid: "TestLab-WeakPSK"
+    bssid: "00:11:22:33:44:57"
+    channel: 11
+    encryption: "WPA2-PSK"
+    key: "password123"
+    purpose: "Testing weak password vulnerabilities"
+    expected_vulnerabilities:
+      - "Weak password"
+      - "Dictionary attack susceptible"
+    
+  # WPS enabled Access Point
+  - name: "wps_enabled"
+    ssid: "TestLab-WPS"
+    bssid: "00:11:22:33:44:58"
+    channel: 3
+    encryption: "WPA2-PSK"
+    wps_enabled: true
+    wps_pin: "12345670"
+    purpose: "Testing WPS vulnerabilities"
+    expected_vulnerabilities:
+      - "WPS brute force"
+      - "PIN recovery"
+    
+  # Modern secure Access Point (control)
+  - name: "secure_control"
+    ssid: "TestLab-Secure"
+    bssid: "00:11:22:33:44:59"
+    channel: 9
+    encryption: "WPA3-SAE"
+    key: "SecureComplexPassword2024!"
+    purpose: "Secure baseline for comparison"
+    expected_vulnerabilities: []
+
+# Test Devices Configuration
+test_devices:
+  # iOS Devices
+  ios_devices:
+    - name: "iPhone_Test_1"
+      mac: "02:00:00:00:01:01"
+      model: "iPhone 13"
+      ios_version: "17.1"
+      auto_join_enabled: true
+      known_networks:
+        - "TestLab-WEP"
+        - "TestLab-Open"
+      purpose: "iOS auto-join behavior testing"
+    
+    - name: "iPad_Test_1"
+      mac: "02:00:00:00:01:02"
+      model: "iPad Pro"
+      ios_version: "17.1"
+      auto_join_enabled: false
+      purpose: "iOS manual connection testing"
+    
+    - name: "iPhone_Legacy"
+      mac: "02:00:00:00:01:03"
+      model: "iPhone 8"
+      ios_version: "16.7"
+      auto_join_enabled: true
+      purpose: "Legacy iOS version testing"
+  
+  # Android Devices (for comparison)
+  android_devices:
+    - name: "Android_Test_1"
+      mac: "02:00:00:00:02:01"
+      model: "Samsung Galaxy S21"
+      android_version: "13"
+      purpose: "Android behavior comparison"
+    
+    - name: "Android_Legacy"
+      mac: "02:00:00:00:02:02"
+      model: "Samsung Galaxy S8"
+      android_version: "9"
+      purpose: "Legacy Android testing"
+  
+  # Router/Gateway devices
+  network_infrastructure:
+    - name: "Test_Router"
+      mac: "02:00:00:00:03:01"
+      model: "Netgear AC1750"
+      firmware: "V1.0.4.84"
+      admin_interface: "192.168.100.1"
+      default_credentials:
+        username: "admin"
+        password: "password"
+      purpose: "Router security testing"
+      expected_vulnerabilities:
+        - "Default credentials"
+        - "Outdated firmware"
+
+# Research Scenarios
+research_scenarios:
+  # Scenario 1: iOS Auto-Join Vulnerability
+  - name: "ios_auto_join_attack"
+    description: "Test iOS auto-join behavior with evil twin attacks"
+    target_devices: ["iPhone_Test_1"]
+    attack_type: "evil_twin"
+    target_ssid: "TestLab-WEP"
+    expected_outcome: "Device connects to evil twin"
+    mitigation_test: "Disable auto-join"
+  
+  # Scenario 2: WEP Cracking Demonstration
+  - name: "wep_vulnerability_demo"
+    description: "Demonstrate WEP encryption weaknesses"
+    target_ap: "legacy_wep"
+    attack_type: "wep_crack_simulation"
+    expected_outcome: "Key recovery simulation"
+    educational_value: "Show WEP insecurity"
+  
+  # Scenario 3: Deauth Attack Impact
+  - name: "deauth_attack_impact"
+    description: "Analyze deauth attack effects on different devices"
+    target_devices: ["iPhone_Test_1", "Android_Test_1"]
+    attack_type: "deauth_simulation"
+    metrics_to_collect:
+      - "Reconnection time"
+      - "User notification"
+      - "Fallback behavior"
+  
+  # Scenario 4: Karma Attack Effectiveness
+  - name: "karma_attack_test"
+    description: "Test automatic connection to known SSIDs"
+    target_devices: ["iPhone_Test_1"]
+    attack_type: "karma_simulation"
+    probe_ssids:
+      - "TestLab-WEP"
+      - "FreeWiFi"
+      - "Starbucks"
+    expected_outcome: "Connection attempts logged"
+
+# Safety and Compliance
+safety_measures:
+  # Environment validation
+  validation_checks:
+    - "Hostname contains 'test', 'lab', or 'research'"
+    - "Network isolated from internet"
+    - "Running in VM environment"
+    - "Authorized SSID prefixes present"
+  
+  # Automatic shutdowns
+  safety_triggers:
+    - "Production network detected"
+    - "Unauthorized MAC addresses found"
+    - "Internet connectivity detected"
+    - "Non-test SSID patterns"
+  
+  # Logging requirements
+  logging:
+    level: "INFO"
+    file: "security_reports/test_session.log"
+    include_packets: false
+    anonymize_data: true
+  
+  # Data protection
+  data_protection:
+    no_personal_data: true
+    anonymize_mac_addresses: true
+    encrypt_reports: false
+    retention_period: "30 days"
+
+# Expected Results Template
+expected_results:
+  vulnerability_categories:
+    high_risk:
+      - "WEP encryption usage"
+      - "Default credentials"
+      - "Open networks"
+    
+    medium_risk:
+      - "WPS enabled"
+      - "Weak passwords"
+      - "Auto-join enabled"
+    
+    low_risk:
+      - "Vendor default SSIDs"
+      - "Outdated firmware warnings"
+  
+  device_behavior:
+    ios_specific:
+      - "Auto-join to known networks"
+      - "MAC randomization behavior"
+      - "Captive portal handling"
+    
+    general:
+      - "Probe request patterns"
+      - "Reconnection attempts"
+      - "Signal strength preferences"
+
+# Reporting Configuration
+reporting:
+  formats:
+    - "JSON"
+    - "PDF"
+    - "CSV"
+  
+  sections:
+    - "Executive Summary"
+    - "Environment Details"
+    - "Discovered Devices"
+    - "Vulnerability Analysis"
+    - "Attack Simulations"
+    - "Recommendations"
+    - "Technical Appendix"
+  
+  distribution:
+    - "Local files"
+    - "Secure archive"
+  
+  anonymization:
+    replace_mac_addresses: true
+    replace_ip_addresses: true
+    generic_device_names: true
