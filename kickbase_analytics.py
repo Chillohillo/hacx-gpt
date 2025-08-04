@@ -27,6 +27,11 @@ try:
 except ImportError:
     openai = None  # type: ignore
 
+from collections import defaultdict
+import re
+import requests
+from bs4 import BeautifulSoup
+
 ###############################################################################
 # Utility helpers
 ###############################################################################
@@ -75,6 +80,8 @@ class KickbaseAnalytics:
         if openai_api_key and openai:
             openai.api_key = openai_api_key
             debug("OpenAI integration enabled.")
+
+        self.external_cache: Dict[str, Dict[str, Any]] = defaultdict(dict)  # cache per player
 
     # ---------------------------------------------------------------------
     # Login
@@ -140,6 +147,95 @@ class KickbaseAnalytics:
         return result
 
     # ---------------------------------------------------------------------
+    # External data (LigaInsider, Transfermarkt, Kicker)
+    # ---------------------------------------------------------------------
+
+    @staticmethod
+    def _slugify(name: str) -> str:
+        """Helper to create URL-friendly slugs (very naive)."""
+        return (
+            re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-").replace("--", "-")
+        )
+
+    def fetch_ligainsider(self, player_name: str) -> Dict[str, Any]:
+        """Attempt to scrape Ligainsider for injury + lineup info (best effort)."""
+        try:
+            slug = self._slugify(player_name)
+            url = f"https://www.ligainsider.de/{slug}/"
+            r = requests.get(url, timeout=10)
+            if r.status_code != 200:
+                return {}
+            soup = BeautifulSoup(r.text, "lxml")
+            # Injury Status
+            inj_div = soup.find("div", class_="injury")
+            injury = inj_div.text.strip() if inj_div else ""
+            # Predicted Lineup (starter?) – Ligainsider marks starters with class starter
+            starter = bool(soup.select_one("span.icon.gamesStart"))
+            return {"injury_info": injury, "predicted_starter": starter}
+        except Exception as e:
+            debug(f"LigaInsider scrape failed for {player_name}: {e}")
+            return {}
+
+    def fetch_transfermarkt(self, player_name: str) -> Dict[str, Any]:
+        """Scrape Transfermarkt for market value + injury history (best effort)."""
+        try:
+            slug = self._slugify(player_name)
+            url = f"https://www.transfermarkt.de/{slug}/profil/spieler"
+            r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
+            if r.status_code != 200:
+                return {}
+            soup = BeautifulSoup(r.text, "lxml")
+            injury_table = soup.find("div", id="verletzungsdaten")
+            injured = bool(injury_table and "Aktuelle Verletzung" in injury_table.text)
+            return {"injured_transfermarkt": injured}
+        except Exception as e:
+            debug(f"Transfermarkt scrape failed for {player_name}: {e}")
+            return {}
+
+    def fetch_kicker_lineup(self, team_name: str, player_name: str) -> Dict[str, Any]:
+        """Scrape Kicker predicted lineup page for given team (best effort)."""
+        try:
+            slug = self._slugify(team_name)
+            url = f"https://www.kicker.de/{slug}/aufstellung"
+            r = requests.get(url, timeout=10)
+            if r.status_code != 200:
+                return {}
+            soup = BeautifulSoup(r.text, "lxml")
+            starter = bool(soup.find(text=re.compile(player_name, re.I)))
+            return {"kicker_predicted_starter": starter}
+        except Exception as e:
+            debug(f"Kicker scrape failed for {player_name}: {e}")
+            return {}
+
+    def enrich_with_external_sources(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Augment dataframe with external info."""
+        debug("Enriching with external sources (LigaInsider, Transfermarkt, Kicker)...")
+        injuries = []
+        starter_flags = []
+        for _, row in tqdm(df.iterrows(), total=df.shape[0], desc="External"):
+            name = row["name"]
+            # Cache lookup
+            if name in self.external_cache:
+                info = self.external_cache[name]
+            else:
+                info = {}
+                info.update(self.fetch_ligainsider(name))
+                info.update(self.fetch_transfermarkt(name))
+                info.update(
+                    self.fetch_kicker_lineup(team_name=str(row.get("team", "")), player_name=name)
+                )
+                self.external_cache[name] = info
+            injuries.append(
+                info.get("injury_info") or ("Yes" if info.get("injured_transfermarkt") else "")
+            )
+            starter_flags.append(
+                info.get("predicted_starter") or info.get("kicker_predicted_starter") or False
+            )
+        df["injury_status"] = injuries
+        df["predicted_starter"] = starter_flags
+        return df
+
+    # ---------------------------------------------------------------------
     # Analysis and prediction
     # ---------------------------------------------------------------------
     def analyze_and_predict(self, players: List[Dict[str, Any]]) -> pd.DataFrame:
@@ -189,6 +285,17 @@ class KickbaseAnalytics:
 
         debug("Analysis complete.")
         return df_sorted
+
+    # Override analyze_and_predict to call enrichment
+    def analyze_and_predict(self, players: List[Dict[str, Any]]) -> pd.DataFrame:
+        df = super().analyze_and_predict(players)  # type: ignore
+        df = self.enrich_with_external_sources(df)
+
+        # Simple points prediction heuristic
+        df["predicted_points"] = (
+            df["points_avg"] * 1.2 + df["predicted_change"] / 1e6
+        )  # simplistic
+        return df
 
     # ---------------------------------------------------------------------
     # Export
