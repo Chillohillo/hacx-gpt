@@ -1,0 +1,297 @@
+version: '3.8'
+
+services:
+  # iOS Kickbase Backend API
+  kickbase-ios-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.ios
+    container_name: kickbase-ios-backend
+    restart: unless-stopped
+    environment:
+      - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key-change-this}
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=sqlite:///app/ios_backend.db
+      - APNS_KEY_PATH=/app/certs/apns_key.p8
+      - APNS_KEY_ID=${APNS_KEY_ID}
+      - APNS_TEAM_ID=${APNS_TEAM_ID}
+      - KICKBASE_EMAIL=${KICKBASE_EMAIL}
+      - KICKBASE_PASSWORD=${KICKBASE_PASSWORD}
+      - KICKBASE_LEAGUE_ID=${KICKBASE_LEAGUE_ID}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./data/ios:/app/data
+      - ./certs:/app/certs:ro
+      - ./logs/ios:/app/logs
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - kickbase-ios-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # iOS Progressive Web App
+  kickbase-ios-pwa:
+    build:
+      context: .
+      dockerfile: Dockerfile.pwa
+    container_name: kickbase-ios-pwa
+    restart: unless-stopped
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+      - STREAMLIT_THEME_BASE=light
+      - API_BASE_URL=http://kickbase-ios-backend:8000
+    volumes:
+      - ./data/pwa:/app/data
+      - ./static:/app/static
+    ports:
+      - "8501:8501"
+    depends_on:
+      - kickbase-ios-backend
+    networks:
+      - kickbase-ios-network
+    command: ["streamlit", "run", "ios_kickbase_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+
+  # Redis für Caching und Session Management
+  redis:
+    image: redis:7-alpine
+    container_name: kickbase-redis
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    ports:
+      - "6379:6379"
+    networks:
+      - kickbase-ios-network
+    command: redis-server /usr/local/etc/redis/redis.conf
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # PostgreSQL für persistente Daten
+  postgres:
+    image: postgres:15-alpine
+    container_name: kickbase-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=kickbase_ios
+      - POSTGRES_USER=kickbase
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-kickbase123}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    networks:
+      - kickbase-ios-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kickbase -d kickbase_ios"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Nginx Reverse Proxy für SSL und Load Balancing
+  nginx:
+    image: nginx:alpine
+    container_name: kickbase-nginx
+    restart: unless-stopped
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - ./static:/var/www/static:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - kickbase-ios-backend
+      - kickbase-ios-pwa
+    networks:
+      - kickbase-ios-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Celery Worker für Background Tasks
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.ios
+    container_name: kickbase-celery-worker
+    restart: unless-stopped
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key-change-this}
+      - KICKBASE_EMAIL=${KICKBASE_EMAIL}
+      - KICKBASE_PASSWORD=${KICKBASE_PASSWORD}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./data/celery:/app/data
+      - ./logs/celery:/app/logs
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - kickbase-ios-network
+    command: ["celery", "-A", "ios_cloud_backend.celery_app", "worker", "--loglevel=info"]
+
+  # Celery Beat für Scheduled Tasks
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile.ios
+    container_name: kickbase-celery-beat
+    restart: unless-stopped
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key-change-this}
+    volumes:
+      - ./data/celery:/app/data
+      - ./logs/celery:/app/logs
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - kickbase-ios-network
+    command: ["celery", "-A", "ios_cloud_backend.celery_app", "beat", "--loglevel=info"]
+
+  # Push Notification Service
+  push-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.push
+    container_name: kickbase-push-service
+    restart: unless-stopped
+    environment:
+      - APNS_KEY_PATH=/app/certs/apns_key.p8
+      - APNS_KEY_ID=${APNS_KEY_ID}
+      - APNS_TEAM_ID=${APNS_TEAM_ID}
+      - BUNDLE_ID=com.kickbase.ultimate.ios
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./certs:/app/certs:ro
+      - ./logs/push:/app/logs
+    depends_on:
+      - redis
+    networks:
+      - kickbase-ios-network
+    ports:
+      - "8002:8002"
+
+  # Monitoring mit Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: kickbase-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - kickbase-ios-network
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+
+  # Grafana für Dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: kickbase-grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin123}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./config/grafana:/etc/grafana/provisioning:ro
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - kickbase-ios-network
+
+  # Log Aggregation mit Loki
+  loki:
+    image: grafana/loki:latest
+    container_name: kickbase-loki
+    restart: unless-stopped
+    volumes:
+      - ./config/loki.yml:/etc/loki/local-config.yaml:ro
+      - loki-data:/tmp/loki
+    ports:
+      - "3100:3100"
+    networks:
+      - kickbase-ios-network
+    command: -config.file=/etc/loki/local-config.yaml
+
+  # Promtail für Log Collection
+  promtail:
+    image: grafana/promtail:latest
+    container_name: kickbase-promtail
+    restart: unless-stopped
+    volumes:
+      - ./config/promtail.yml:/etc/promtail/config.yml:ro
+      - ./logs:/var/log:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    networks:
+      - kickbase-ios-network
+    command: -config.file=/etc/promtail/config.yml
+    depends_on:
+      - loki
+
+  # File Browser für Log Management
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: kickbase-filebrowser
+    restart: unless-stopped
+    volumes:
+      - ./data:/srv/data
+      - ./logs:/srv/logs
+      - ./config/filebrowser.json:/.filebrowser.json:ro
+    ports:
+      - "8080:80"
+    networks:
+      - kickbase-ios-network
+
+# Volumes für persistente Daten
+volumes:
+  redis-data:
+    driver: local
+  postgres-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  loki-data:
+    driver: local
+
+# Netzwerk für Service-Kommunikation
+networks:
+  kickbase-ios-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

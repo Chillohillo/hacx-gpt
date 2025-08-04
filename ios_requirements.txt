@@ -1,0 +1,90 @@
+# iOS Kickbase Ultimate Analyzer - Requirements
+# ============================================
+
+# Core Web Framework
+streamlit>=1.28.0
+flask>=2.3.0
+fastapi>=0.104.0
+uvicorn>=0.24.0
+
+# Data Science & Analytics
+pandas>=2.1.0
+numpy>=1.24.0
+scipy>=1.11.0
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+lightgbm>=4.1.0
+
+# Visualization (Touch-optimiert)
+plotly>=5.17.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+altair>=5.1.0
+
+# Machine Learning & AI
+torch>=2.1.0
+tensorflow>=2.14.0
+transformers>=4.35.0
+openai>=1.3.0
+anthropic>=0.7.0
+
+# Web & API
+requests>=2.31.0
+aiohttp>=3.9.0
+httpx>=0.25.0
+beautifulsoup4>=4.12.0
+selenium>=4.15.0
+
+# Mobile & PWA Support
+Pillow>=10.0.0
+qrcode>=7.4.2
+pywebpush>=1.14.0
+vapid>=1.1.0
+
+# Database
+sqlite3  # Built-in
+sqlalchemy>=2.0.0
+alembic>=1.12.0
+
+# Configuration & Utils
+pyyaml>=6.0
+python-dotenv>=1.0.0
+configparser>=5.3.0
+loguru>=0.7.0
+python-dateutil>=2.8.0
+pytz>=2023.3
+
+# Cloud Integration
+google-cloud-storage>=2.10.0
+google-cloud-firestore>=2.13.0
+boto3>=1.29.0
+azure-storage-blob>=12.19.0
+
+# iOS-spezifische Features
+pyobjc>=10.0  # Für iOS-Integration (falls native Komponenten)
+rumps>=0.4.0  # macOS/iOS Menu Bar Apps
+
+# Notification Services
+plyer>=2.1.0  # Cross-platform notifications
+pync>=2.0.3   # macOS/iOS Notifications
+
+# Scheduling & Automation
+schedule>=1.2.0
+celery>=5.3.0
+redis>=5.0.0
+
+# Security & Encryption
+cryptography>=41.0.0
+pycryptodome>=3.19.0
+keyring>=24.3.0
+
+# Development & Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.9.0
+flake8>=6.1.0
+mypy>=1.6.0
+
+# Optional: Native iOS Integration
+# pyobjc-framework-UIKit>=10.0  # Uncomment für native iOS Features
+# pyobjc-framework-UserNotifications>=10.0
