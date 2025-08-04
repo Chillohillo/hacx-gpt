@@ -1,5 +1,84 @@
-openai>=1.0.0
-colorama>=0.4.6
-pwinput>=1.0.3
+# Core Python dependencies
+requests>=2.31.0
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+xgboost>=1.7.0
+lightgbm>=4.0.0
+
+# Data visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+
+# Machine Learning and AI
+tensorflow>=2.13.0
+torch>=2.0.0
+transformers>=4.30.0
+
+# API and Web
+flask>=2.3.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+beautifulsoup4>=4.12.0
+selenium>=4.10.0
+
+# Database
+sqlalchemy>=2.0.0
+sqlite3
+
+# Cloud and Storage
+google-cloud-storage>=2.10.0
+google-cloud-drive>=3.0.0
+boto3>=1.28.0
+
+# Kickbase API
+kickbase-api>=1.0.0
+
+# Data processing
+openpyxl>=3.1.0
+xlsxwriter>=3.1.0
 python-dotenv>=1.0.0
-rich>=13.3.5
+
+# Scheduling and automation
+schedule>=1.2.0
+crontab>=0.23.0
+
+# Security (Kali Linux support)
+cryptography>=41.0.0
+pycryptodome>=3.18.0
+
+# Logging and monitoring
+loguru>=0.7.0
+
+# Configuration
+pyyaml>=6.0
+configparser>=5.3.0
+
+# HTTP and async
+aiohttp>=3.8.0
+httpx>=0.24.0
+
+# Date/time handling
+python-dateutil>=2.8.0
+pytz>=2023.3
+
+# Statistical analysis
+scipy>=1.11.0
+statsmodels>=0.14.0
+
+# Web scraping
+scrapy>=2.9.0
+
+# AI Integration
+openai>=0.27.0
+anthropic>=0.3.0
+
+# Notification services
+discord.py>=2.3.0
+telegram-bot>=20.0
+
+# Development tools
+pytest>=7.4.0
+black>=23.7.0
+flake8>=6.0.0

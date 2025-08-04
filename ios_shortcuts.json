@@ -1,0 +1,490 @@
+{
+  "shortcuts_version": "2.0.0",
+  "app_name": "Kickbase iOS Ultimate",
+  "description": "iOS Shortcuts für Kickbase Ultimate Analyzer",
+  "shortcuts": [
+    {
+      "id": "kickbase_update",
+      "name": "🔄 Kickbase Update",
+      "description": "Aktualisiert alle Kickbase Daten und zeigt Zusammenfassung",
+      "icon": "arrow.clockwise.circle.fill",
+      "color": "blue",
+      "actions": [
+        {
+          "type": "get_url",
+          "url": "https://your-kickbase-app.herokuapp.com/api/update",
+          "method": "GET",
+          "headers": {
+            "Authorization": "Bearer YOUR_API_TOKEN",
+            "User-Agent": "Kickbase-iOS-Shortcuts/2.0"
+          }
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "status"
+        },
+        {
+          "type": "if_then_else",
+          "condition": "equals",
+          "value": "success",
+          "then": [
+            {
+              "type": "show_notification",
+              "title": "✅ Kickbase Update",
+              "body": "Daten erfolgreich aktualisiert!"
+            },
+            {
+              "type": "speak_text",
+              "text": "Kickbase Daten wurden erfolgreich aktualisiert"
+            }
+          ],
+          "else": [
+            {
+              "type": "show_notification",
+              "title": "❌ Update Fehler",
+              "body": "Datenupdate fehlgeschlagen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "top_transfers",
+      "name": "💰 Top Transfers",
+      "description": "Zeigt die besten Transferempfehlungen",
+      "icon": "arrow.up.arrow.down.circle.fill",
+      "color": "green",
+      "actions": [
+        {
+          "type": "get_url",
+          "url": "https://your-kickbase-app.herokuapp.com/api/recommendations",
+          "method": "GET",
+          "headers": {
+            "Authorization": "Bearer YOUR_API_TOKEN"
+          }
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "recommendations"
+        },
+        {
+          "type": "repeat_with_each",
+          "input": "recommendations",
+          "actions": [
+            {
+              "type": "get_json_value",
+              "key": "name"
+            },
+            {
+              "type": "get_json_value", 
+              "key": "action"
+            },
+            {
+              "type": "get_json_value",
+              "key": "confidence"
+            },
+            {
+              "type": "text",
+              "text": "{name}: {action} ({confidence}% sicher)"
+            }
+          ]
+        },
+        {
+          "type": "combine_text",
+          "separator": "\n"
+        },
+        {
+          "type": "show_result",
+          "title": "🚀 Top Transferempfehlungen"
+        }
+      ]
+    },
+    {
+      "id": "team_value",
+      "name": "💎 Team Wert",
+      "description": "Zeigt aktuellen Teamwert und Entwicklung",
+      "icon": "chart.line.uptrend.xyaxis.circle.fill",
+      "color": "purple",
+      "actions": [
+        {
+          "type": "get_url",
+          "url": "https://your-kickbase-app.herokuapp.com/api/team/value",
+          "method": "GET"
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "total_value"
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "change_percent"
+        },
+        {
+          "type": "text",
+          "text": "💰 Teamwert: €{total_value}M\n📈 Änderung: {change_percent}%"
+        },
+        {
+          "type": "show_notification",
+          "title": "💎 Ihr Teamwert",
+          "body": "€{total_value}M ({change_percent}%)"
+        },
+        {
+          "type": "speak_text",
+          "text": "Ihr Teamwert beträgt {total_value} Millionen Euro"
+        }
+      ]
+    },
+    {
+      "id": "injury_alerts",
+      "name": "🚨 Verletzungen",
+      "description": "Prüft auf neue Verletzungen in Ihrem Team",
+      "icon": "cross.circle.fill",
+      "color": "red",
+      "actions": [
+        {
+          "type": "get_url",
+          "url": "https://your-kickbase-app.herokuapp.com/api/injuries",
+          "method": "GET"
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "injured_players"
+        },
+        {
+          "type": "count",
+          "input": "injured_players"
+        },
+        {
+          "type": "if_then_else",
+          "condition": "greater_than",
+          "value": 0,
+          "then": [
+            {
+              "type": "repeat_with_each",
+              "input": "injured_players",
+              "actions": [
+                {
+                  "type": "get_json_value",
+                  "key": "name"
+                },
+                {
+                  "type": "get_json_value",
+                  "key": "injury_type"
+                },
+                {
+                  "type": "text",
+                  "text": "🚨 {name}: {injury_type}"
+                }
+              ]
+            },
+            {
+              "type": "combine_text",
+              "separator": "\n"
+            },
+            {
+              "type": "show_notification",
+              "title": "🚨 Verletzungen in Ihrem Team",
+              "body": "Neue Verletzungen gefunden!"
+            }
+          ],
+          "else": [
+            {
+              "type": "show_notification",
+              "title": "✅ Keine Verletzungen",
+              "body": "Alle Spieler sind fit!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lineup_optimizer",
+      "name": "⚽ Aufstellung",
+      "description": "Optimiert Ihre Aufstellung für den nächsten Spieltag",
+      "icon": "person.3.fill",
+      "color": "orange",
+      "actions": [
+        {
+          "type": "get_url",
+          "url": "https://your-kickbase-app.herokuapp.com/api/lineup/optimize",
+          "method": "POST",
+          "body": {
+            "formation": "4-3-3",
+            "budget_limit": 200000000
+          }
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "optimal_lineup"
+        },
+        {
+          "type": "repeat_with_each",
+          "input": "optimal_lineup",
+          "actions": [
+            {
+              "type": "get_json_value",
+              "key": "position"
+            },
+            {
+              "type": "get_json_value",
+              "key": "name"
+            },
+            {
+              "type": "get_json_value",
+              "key": "expected_points"
+            },
+            {
+              "type": "text",
+              "text": "{position}: {name} ({expected_points} Pkt.)"
+            }
+          ]
+        },
+        {
+          "type": "combine_text",
+          "separator": "\n"
+        },
+        {
+          "type": "show_result",
+          "title": "⚽ Optimale Aufstellung"
+        }
+      ]
+    },
+    {
+      "id": "market_trends",
+      "name": "📊 Markt Trends",
+      "description": "Zeigt aktuelle Markttrends und Schnäppchen",
+      "icon": "chart.bar.fill",
+      "color": "teal",
+      "actions": [
+        {
+          "type": "get_url",
+          "url": "https://your-kickbase-app.herokuapp.com/api/market/trends",
+          "method": "GET"
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "trending_up"
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "trending_down"
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "bargains"
+        },
+        {
+          "type": "text",
+          "text": "📈 STEIGEND:\n{trending_up}\n\n📉 FALLEND:\n{trending_down}\n\n💎 SCHNÄPPCHEN:\n{bargains}"
+        },
+        {
+          "type": "show_result",
+          "title": "📊 Markttrends"
+        }
+      ]
+    },
+    {
+      "id": "ai_analysis",
+      "name": "🤖 AI Analyse",
+      "description": "Lässt AI Ihre Liga analysieren",
+      "icon": "brain.head.profile",
+      "color": "indigo",
+      "actions": [
+        {
+          "type": "ask_for_input",
+          "prompt": "Was möchten Sie analysieren?",
+          "input_type": "text",
+          "default": "Welche Transfers soll ich diese Woche machen?"
+        },
+        {
+          "type": "get_url",
+          "url": "https://your-kickbase-app.herokuapp.com/api/ai/analyze",
+          "method": "POST",
+          "body": {
+            "question": "provided_input"
+          }
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "analysis"
+        },
+        {
+          "type": "show_result",
+          "title": "🤖 AI Analyse"
+        },
+        {
+          "type": "speak_text",
+          "text": "AI Analyse abgeschlossen"
+        }
+      ]
+    },
+    {
+      "id": "daily_summary",
+      "name": "📅 Tages-Summary",
+      "description": "Tägliche Zusammenfassung aller wichtigen Informationen",
+      "icon": "calendar.circle.fill",
+      "color": "cyan",
+      "actions": [
+        {
+          "type": "get_url",
+          "url": "https://your-kickbase-app.herokuapp.com/api/summary/daily",
+          "method": "GET"
+        },
+        {
+          "type": "get_json_from_input",
+          "key": "summary"
+        },
+        {
+          "type": "get_json_value",
+          "key": "team_value_change"
+        },
+        {
+          "type": "get_json_value",
+          "key": "new_injuries"
+        },
+        {
+          "type": "get_json_value",
+          "key": "top_recommendation"
+        },
+        {
+          "type": "text",
+          "text": "📅 KICKBASE DAILY SUMMARY\n\n💰 Teamwert: {team_value_change}\n🚨 Verletzungen: {new_injuries}\n🚀 Top-Tipp: {top_recommendation}"
+        },
+        {
+          "type": "show_result",
+          "title": "📅 Tages-Summary"
+        },
+        {
+          "type": "show_notification",
+          "title": "📅 Daily Summary bereit",
+          "body": "Ihre tägliche Kickbase-Zusammenfassung"
+        }
+      ]
+    }
+  ],
+  "automation_shortcuts": [
+    {
+      "id": "morning_briefing",
+      "name": "🌅 Morgen Briefing",
+      "description": "Automatisches Morgen-Briefing um 8:00 Uhr",
+      "trigger": "time",
+      "trigger_time": "08:00",
+      "actions": [
+        {
+          "type": "run_shortcut",
+          "shortcut_name": "daily_summary"
+        },
+        {
+          "type": "run_shortcut",
+          "shortcut_name": "injury_alerts"
+        }
+      ]
+    },
+    {
+      "id": "evening_update",
+      "name": "🌙 Abend Update",
+      "description": "Abendliches Update um 20:00 Uhr",
+      "trigger": "time",
+      "trigger_time": "20:00",
+      "actions": [
+        {
+          "type": "run_shortcut",
+          "shortcut_name": "kickbase_update"
+        },
+        {
+          "type": "run_shortcut",
+          "shortcut_name": "top_transfers"
+        }
+      ]
+    }
+  ],
+  "widget_shortcuts": [
+    {
+      "id": "team_value_widget",
+      "name": "💰 Teamwert Widget",
+      "description": "Zeigt Teamwert im iOS Widget",
+      "widget_size": "small",
+      "update_frequency": "hourly",
+      "actions": [
+        {
+          "type": "get_url",
+          "url": "https://your-kickbase-app.herokuapp.com/api/team/value",
+          "method": "GET"
+        },
+        {
+          "type": "format_widget_text",
+          "title": "💰 Teamwert",
+          "value": "{total_value}M€",
+          "change": "{change_percent}%"
+        }
+      ]
+    },
+    {
+      "id": "next_transfers_widget",
+      "name": "🚀 Top Transfers Widget",
+      "description": "Zeigt Top 3 Transferempfehlungen",
+      "widget_size": "medium",
+      "update_frequency": "every_4_hours",
+      "actions": [
+        {
+          "type": "get_url",
+          "url": "https://your-kickbase-app.herokuapp.com/api/recommendations?limit=3",
+          "method": "GET"
+        },
+        {
+          "type": "format_widget_list",
+          "title": "🚀 Top Transfers",
+          "items": "recommendations"
+        }
+      ]
+    }
+  ],
+  "siri_shortcuts": [
+    {
+      "phrase": "Kickbase Update",
+      "shortcut_id": "kickbase_update"
+    },
+    {
+      "phrase": "Zeig mir meine Transfers",
+      "shortcut_id": "top_transfers"
+    },
+    {
+      "phrase": "Wie ist mein Teamwert",
+      "shortcut_id": "team_value"
+    },
+    {
+      "phrase": "Gibt es Verletzungen",
+      "shortcut_id": "injury_alerts"
+    },
+    {
+      "phrase": "Optimiere meine Aufstellung",
+      "shortcut_id": "lineup_optimizer"
+    },
+    {
+      "phrase": "Kickbase Analyse",
+      "shortcut_id": "ai_analysis"
+    }
+  ],
+  "installation_instructions": {
+    "step1": "Öffnen Sie die iOS Shortcuts App",
+    "step2": "Tippen Sie auf '+' um einen neuen Shortcut zu erstellen",
+    "step3": "Kopieren Sie die gewünschte Shortcut-Konfiguration",
+    "step4": "Fügen Sie Ihre API-URL und Token ein",
+    "step5": "Testen Sie den Shortcut",
+    "step6": "Fügen Sie den Shortcut zu Siri hinzu (optional)",
+    "step7": "Erstellen Sie Automationen für tägliche Updates"
+  },
+  "api_endpoints": {
+    "base_url": "https://your-kickbase-app.herokuapp.com",
+    "endpoints": {
+      "/api/update": "Daten aktualisieren",
+      "/api/recommendations": "Transferempfehlungen",
+      "/api/team/value": "Teamwert",
+      "/api/injuries": "Verletzungen",
+      "/api/lineup/optimize": "Aufstellung optimieren",
+      "/api/market/trends": "Markttrends",
+      "/api/ai/analyze": "AI Analyse",
+      "/api/summary/daily": "Tägliche Zusammenfassung"
+    }
+  }
+}
